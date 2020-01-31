@@ -16,7 +16,8 @@ module.exports = function(sequelize, DataTypes) {
     image: DataTypes.STRING,
     category: DataTypes.STRING,
     dishType: DataTypes.STRING,
-    postedBy: DataTypes.INTEGER
+    postedBy: DataTypes.INTEGER,
+    userNotes: DataTypes.TEXT
   });
 
   //We associate the user's id with the recipe's postedBy field
