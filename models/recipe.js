@@ -6,11 +6,11 @@ module.exports = function(sequelize, DataTypes) {
     },
     servings: DataTypes.INTEGER,
     ingredients: {
-      type: DataTypes.TEXT,
+      type: DataTypes.JSON,
       allowNull: false
     },
     instructions: {
-      type: DataTypes.TEXT,
+      type: DataTypes.JSON,
       allowNull: false
     },
     image: DataTypes.STRING,
