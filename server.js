@@ -41,7 +41,7 @@ app.use((req, res, next) => {
   }
   next();
 });
-var hbsContent = {
+var exphbs = {
   userName: "",
   loggedin: false,
   title: " you are not logged in",
@@ -88,3 +88,4 @@ db.sequelize.sync(syncOptions).then(function() {
 });
 
 module.exports = app;
+module.exports = sessionChecker;
