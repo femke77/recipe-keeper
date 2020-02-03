@@ -16,17 +16,21 @@ module.exports = function(sequelize, DataTypes) {
     image: DataTypes.STRING,
     category: DataTypes.STRING,
     dishType: DataTypes.STRING,
-    source: DataTypes.STRING,
-    userNotes: DataTypes.TEXT
+    source: DataTypes.STRING
   });
 
-  //We associate the user's id with the recipe's source field
+  //We associate the user's id with the recipe so we know who created/submitted the recipe
   //The relationship is that one user may post many recipes to the site
   Recipe.associate = function(models) {
     Recipe.belongsTo(models.User, {
+      // will make FK userId
       foreignKey: {
         allowNull: true
       }
+    });
+    Recipe.belongsToMany(User, {
+      as: "Saves",
+      through: "Save"
     });
   };
 

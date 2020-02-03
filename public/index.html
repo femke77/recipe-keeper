@@ -15,16 +15,15 @@
             color: red;
             font-weight: bold;
         }
-        </style>
+    </style>
 </head>
 
 <body>
     <h1>Recipes</h1>
     <!-- Uncomment this button to use spoonacular api -->
-    <div id="recipe">
+    <!-- <div id="recipe">
         <button type="submit" id="btn">Click to download recipes</button>
-    </div>
-
+    </div> -->
 
     <!-- Recipe Form -->
     <form class="recipe">
@@ -98,6 +97,7 @@
             </div>
             <div id="ingredientField" class="field">
                 <!-- As many ingredient fields as needed per recipe can be generated to this div -->
+                <!-- accidental blank ingredient field left over after user input will not affect validation or submit -->
             </div>
             <div class="field">
                 <p class="control">
@@ -109,9 +109,15 @@
             <div class="field">
                 <label class="label">Instructions</label>
                 <div class="control is-expanded">
-                    <textarea class="textarea required" name="instructions" id="instructions" placeholder="Prehead oven to 350&deg ..." rows="10"></textarea>
+                    <textarea class="textarea required" name="instructions" id="instructions" placeholder="Preheat oven to 350&deg ..." rows="8"></textarea>
                 </div>
             </div>
+            <!-- <div class="field">
+                <label class="label">User Notes</label>
+                <div class="control is-expanded">
+                    <textarea class="textarea required" id="userNotes" placeholder="When making this, I noticed I had to ..." rows="3"></textarea>
+                </div>
+            </div> -->
             <div class="field">
                 <label class="label">Image Link (URL)</label>
                 <div class="control">
@@ -185,7 +191,7 @@
                     source: $("#source").val().trim(),
                     instructions: $("#instructions").val().trim(),
                     ingredients: ingredientJSON,
-                    //this has to come from the passport session
+                    //this has to come from the passport session:
                     UserId: 1
                 }
                 console.log(newRecipe)
