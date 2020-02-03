@@ -4,71 +4,188 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Recipes</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.8.0/css/bulma.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 </head>
 
 <body>
     <h1>Recipes</h1>
     <div id="recipe">
+        <button type="submit" id="btn">Click to download recipes</button>
     </div>
+    <!-- Recipe Form -->
+    <div id="recipeForm">
+        <div class="field">
+            <label class="label">Title</label>
+            <div class="control">
+                <input class="input" type="text" placeholder="e.g Chicken Noodle Soup ">
+            </div>
+        </div>
+        <div class="field">
+            <div class="control">
+                <div class="select">
+                    <select>
+                        <option>Servings</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="4">4</option>
+                        <option value="6">6</option>
+                        <option value="8">8</option>
+                        <option value="10">10</option>
+                        <option value="12">12</option>
+                        <option value="16">16</option>
+                        <option value="20">20</option>
+                        <option value="24">24</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="field">
+            <div class="control">
+                <div class="select">
+                    <select>
+                        <option>Cuisine</option>
+                        <option value="American">American</option>
+                        <option value="Mexican">Mexican</option>
+                        <option value="Mediterrainian">Mediterrainian</option>
+                        <option value="Italian">Italian</option>
+                        <option value="French">French</option>
+                        <option value="German">German</option>
+                        <option value="Indian">Indian</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="field">
+            <div class="control">
+                <div class="select">
+                    <select>
+                        <option>Dish Type</option>
+                        <option value="Main Dish">Main Dish</option>
+                        <option value="Side Dish">Side Dish</option>
+                        <option value="Soup">Soup</option>
+                        <option value="Appetizer">Appetizer</option>
+                        <option value="Beverage">Beverage</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="field">
+            <label class="label">Source</label>
+            <div class="control">
+                <input class="input" type="text" placeholder="e.g Taste of Home ">
+            </div>
+        </div>
+        <div class="field">
+            <label class="label">Ingredients</label>
+            <div class="control is-expanded">
+                <input class="input" type="text" placeholder="e.g 1/2 cup granulated sugar ">
+            </div>
+        </div>
+        <div class="field">
+            <div class="control is-expanded">
+                <input class="input" type="text" placeholder="e.g  1 1/2 cup AP flour, sifted ">
+            </div>
+        </div>
+       
+            
+        
+        <div id="ingredientField" class="field">
+            <!-- as many ingredient fields as needed per recipe can be generated to this div -->
+        </div>
+        <div class="field">
+            <p class="control">
+                <a class="button" id="addField">
+                    Add another ingredient field
+                </a>
+            </p>
+        </div>
+        <div class="field">
+            <label class="label">Instructions</label>
+            <div class="control is-expanded">
+                <textarea class="textarea" placeholder="Prehead oven to 350&deg ..." rows="10"></textarea>
+            </div>
+        </div>
+        <div class="field">
+            <label class="label">Image Link (URL)</label>
+            <div class="control">
+                <input class="input" type="text">
+            </div>
+        </div>
+        <div class="control">
+            <button class="button is-primary">Submit</button>
+        </div>
+    </div>
+    <!-- End Recipe Form -->
+
+
+
     <script>
-        var apiKey = "8291ac263908494dbb724a8ba3637f1a";
+        var apiKey = "";
         var num = 10;
 
-        $.ajax({
-            url: "https://api.spoonacular.com/recipes/random?number=" + num + "&apiKey=" + apiKey,
-            method: "GET"
-        }).then(function (res) {
-            console.log(res);
-            //current idea is to process the json data after the Get, and then do a post to my db. 
-            //make sure to handle undefined and null 
-            for (let i = 0; i < res.recipes.length; i++) {
-                var title = res.recipes[i].title;
-                var servings = res.recipes[i].servings || 0;
-                var image = res.recipes[i].image || "";
-                var category = res.recipes[i].cuisines.length > 0 ? res.recipes[i].cuisines[0] : "";
-                var dishType = res.recipes[i].dishTypes.length > 0 ? res.recipes[i].dishTypes[0] : "";
-                var source = res.recipes[i].sourceName || "";
-                var instructions = res.recipes[i].instructions;
-                var ingredients = {};
+        // Button to trigger 10 more recipes post to the mysql database
+        $("#btn").on("click", function (event) {
+            event.preventDefault();
+            $.ajax({
+                url: "https://api.spoonacular.com/recipes/random?number=" + num + "&apiKey=" + apiKey,
+                method: "GET"
+            }).then(function (res) {
+                console.log(res);
+                //current idea is to process the json data after the Get, and then do a post to my db. 
+                //make sure to handle undefined and null 
+                for (let i = 0; i < res.recipes.length; i++) {
+                    var title = res.recipes[i].title;
+                    var servings = res.recipes[i].servings || 0;
+                    var image = res.recipes[i].image || "";
+                    var category = res.recipes[i].cuisines.length > 0 ? res.recipes[i].cuisines[0] : "";
+                    var dishType = res.recipes[i].dishTypes.length > 0 ? res.recipes[i].dishTypes[0] : "";
+                    var source = res.recipes[i].sourceName || "";
+                    var instructions = res.recipes[i].instructions;
+                    var ingredients = {};
 
-                console.log(`${title} ${servings} ${image} ${category} ${dishType} ${source}`);
+                    console.log(`${title} ${servings} ${image} ${category} ${dishType} ${source}`);
 
-                for (let j = 0; j < res.recipes[i].extendedIngredients.length; j++) {
-                    ingredients["ingredient_" + [j]] = res.recipes[i].extendedIngredients[j].original
+                    for (let j = 0; j < res.recipes[i].extendedIngredients.length; j++) {
+                        ingredients["ingredient_" + [j]] = res.recipes[i].extendedIngredients[j].original
+                    }
+
+                    // console.log(ingredients);
+                    // console.log(instructions);
+
+                    //make a new recipe object 
+                    let newRecipe = {
+                        title: title,
+                        servings: servings,
+                        image: image,
+                        category: category,
+                        dishType: dishType,
+                        source: source,
+                        instructions: instructions,
+                        ingredients: ingredients
+                        //user id will added when this is part of a user submission
+                    }
+
+                    //send to database with post
+                    $.post("/db/newrecipe", newRecipe, function (result) {
+                        console.log("posted")
+                    });
                 }
 
-                // console.log(ingredients);
-                // console.log(instructions);
-                //make a new recipe object 
-                let newRecipe = {
-                    title: title,
-                    servings: servings,
-                    image: image,
-                    category: category,
-                    dishType: dishType,
-                    source: source,
-                    instructions: instructions,
-                    ingredients: ingredients
-                }
+               
 
-                //send to database with post
-                $.post("/db/newrecipe", newRecipe, function (result) {
-                    console.log("posted")
-                });
-            }
-
-
-
-
-
-
-
+            });
         });
 
+                    //Dynamic ingredient fields
+             $("#addField").on("click", function(event){
+                    event.preventDefault();
+                    console.log("clicked")
+                    var html = "<div class='field' <div class='control'><input class='input' type='text'></div></div>"
+                    $("#ingredientField").append(html);
+                });
 
 
 
