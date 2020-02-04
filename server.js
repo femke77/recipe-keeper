@@ -17,7 +17,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(
   session({
-    key: "user_sid",
+    key: "user_id",
     secret: "somtingWrong",
     resave: false,
     saveUnintialized: false,

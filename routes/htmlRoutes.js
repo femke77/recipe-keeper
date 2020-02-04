@@ -9,8 +9,22 @@ var exphbs = require("../server");
 app.get("/", sessionChecker, (req, res) => {
   res.redirect("/login");
 });
-
-app.route("/signup").get((req, res) => {
-  res.render("signup", exphbs);
-});
+// for sign up page
+app.route("/signup")
+  .get((req, res) => {
+    res.render("signup", exphbs);
+  })
+  .post((req, res) => {
+    User.create({
+      userName: req.body.userName,
+      password: req.body.password
+    })
+      .then(userName => {
+        req.session.user = user.dataValues;
+        res.redirect("/dashboard");
+      })
+      .catch(error => {
+        res.redirect("/signup");
+      });
+  });
 module.exports = router;
