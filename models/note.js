@@ -9,8 +9,8 @@ module.exports = function(sequelize, DataTypes) {
   Note.associate = function(models) {
     //By default the foreign key for a belongsTo relation will be generated
     //from the target model name and the target primary key name
-    Note.belongsTo(models.Recipe); //recipeId
-    Note.belongsTo(models.User); //userId
+    Note.belongsTo(models.Recipe); // fk 'recipeId'
+    Note.belongsTo(models.User); // fk 'userId'
   };
 
   return Note;

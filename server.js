@@ -3,7 +3,6 @@ var express = require("express");
 var exphbs = require("express-handlebars");
 var apiRoutes = require("./routes/apiRoutes");
 var htmlRoutes = require("./routes/htmlRoutes");
-var dbRoutes = require("./routes/dbRoutes");
 
 var db = require("./models");
 
@@ -18,7 +17,6 @@ app.use(express.static("public"));
 // Routes
 app.use(apiRoutes);
 app.use(htmlRoutes);
-app.use(dbRoutes);
 
 // Handlebars
 app.engine(
@@ -47,5 +45,3 @@ db.sequelize.sync(syncOptions).then(function() {
     );
   });
 });
-
-module.exports = app;

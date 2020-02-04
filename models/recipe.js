@@ -23,15 +23,18 @@ module.exports = function(sequelize, DataTypes) {
   //The relationship is that one user may post many recipes to the site
   Recipe.associate = function(models) {
     Recipe.belongsTo(models.User, {
-      // will make FK userId
+      // will make FK 'userId'
       foreignKey: {
         allowNull: true
       }
     });
-    Recipe.belongsToMany(User, {
+    //this is how the users will save recipes (many to many)
+    Recipe.belongsToMany(models.User, {
       as: "Saves",
       through: "Save"
     });
+    //a recipe can have notes made by any number of users associated with it
+    Recipe.hasMany(models.Note);
   };
 
   return Recipe;
