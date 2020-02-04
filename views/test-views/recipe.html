@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+
+    <!-- Viewport required with Bulma  -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Recipe Page</title>
+
+    <!-- Bulma CDN  -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-brand">
+
+                <!-- Cookie Link  -->
+                <a class="navbar-item" href="noneYa">
+
+                    <!-- Cookie  -->
+                    <i class="fas fa-cookie-bite fa-5x"></i>
+                </a>
+                <span class="navbar-burger burger" data-target="navbarMenu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </span>
+            </div>
+            <div id="navbarMenu" class="navbar-menu">
+                <div class="navbar-end">
+                    <a class="navbar-item is-active">
+                        Search
+                    </a>
+                    <a class="navbar-item">
+                        Favorites
+                    </a>
+                    <a class="navbar-item">
+                        Team
+                    </a>
+                    <div class="navbar-item has-dropdown is-hoverable">
+                        <a class="navbar-link">
+                            Account
+                        </a>
+                        <div class="navbar-dropdown">
+                            <a class="navbar-item">
+                                Dashboard
+                            </a>
+                            <a class="navbar-item">
+                                Profile
+                            </a>
+                            <a class="navbar-item">
+                                Settings
+                            </a>
+                            <hr class="navbar-divider">
+                            <div class="navbar-item">
+                                Logout
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+
+        <!-- Start Body  -->
+        <div class="container">
+
+            <!-- Awesome Moving Bg -->
+            <div id="flow">
+                <span class="flow-1"></span>
+                <span class="flow-2"></span>
+                <span class="flow-3"></span>
+            </div>
+
+            <!-- Start Search  -->
+            <div class="section">
+                <div class="box">
+                    <div class="field has-addons">
+                        <div class="control is-expanded">
+                            <input class="input has-text-centered" type="search" placeholder="What are you craving?">
+                        </div>
+                        <div class="control">
+                            <a class="button is-info">Search</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- End Search  -->
+                <div class="columns is-multiline" id="recipesBody">
+
+                    <!-- Card one -->
+                    <div class="column is-one-third">
+                        <div class="card large">
+
+                            <div class="card-content">
+                                <div class="media">
+                                    <div class="media-content">
+                                        <p class="title is-4 no-padding">Buttery Blueberry Pancakes</p>
+                                        <hr>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-image">
+                                <figure class="image">
+
+                                    <!-- image  -->
+                                    <img
+                                        src="https://www.cookingclassy.com/wp-content/uploads/2015/08/blueberry-pancakes-16.jpg" />
+                                </figure>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Card two -->
+                    <div class="column is-one-third">
+                        <div class="card large">
+                            <div class="card-content">
+                                <div class="media">
+                                    <div class="media-content">
+                                        <p class="title is-4 no-padding">Ingredients</p>
+                                        <hr>
+                                    </div>
+                                </div>
+                                <div class="content">
+                                    <ul>
+                                        <li>1 recipe pastry for a 9 inch double crust pie
+                                        </li>
+                                        <li>1/2 cup unsalted butter
+                                        </li>
+                                        <li>1/2 cup white sugar
+                                        </li>
+                                        <li>3 tablespoons all-purpose flour
+                                        </li>
+                                        <li>8 Granny Smith apples - peeled, cored and sliced
+                                        </li>
+                                        <li>1/2 cup packed brown sugar
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!-- Card Three Card -->
+                    <div class="column is-one-third">
+                        <div class="card large">
+                            <div class="card-content">
+                                <div class="media">
+                                    <div class="media-content">
+                                        <p class="title is-4 no-padding">Directions</p>
+                                        <hr>
+                                    </div>
+                                </div>
+                                <div class="content">
+                                    <ol>
+                                        <li>
+                                            Combine milk with vinegar in a medium bowl and set aside for 5 minutes to
+                                            "sour".
+                                        </li>
+                                        <li>
+                                            Combine flour, sugar, baking powder, baking soda, and salt in a large mixing
+                                            bowl. Whisk egg and butter into "soured" milk. Pour the flour mixture into
+                                            the wet ingredients and whisk until lumps are gone.
+                                        </li>
+                                        <li>
+                                            Heat a large skillet over medium heat, and coat with cooking spray. Pour 1/4
+                                            cupfuls of batter onto the skillet, and cook until bubbles appear on the
+                                            surface. Flip with a spatula, and cook until browned on the other side.
+                                        </li>
+                                        <li>
+                                            Sprinkle booberries on top, and swirl pancake sauce until delicious!
+                                        </li>
+                                    </ol>
+                                </div>
+                                <iframe width="auto" height="auto" src="https://www.youtube.com/embed/PYwzW6CCxJU"
+                                    frameborder="0"
+                                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                                    allowfullscreen></iframe>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- End Cards  -->
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+    <footer class="footer">
+        <div class="container">
+            <div class="content has-text-centered">
+                <div class="soc">
+                    <a href="#"><i class="fab fa-github fa-3x" aria-hidden="true"></i></a>
+                </div>
+                <strong>Crave Recipes</strong> by Meg Myers, Kory, and Miguel Delos
+                Santos.
+            </div>
+        </div>
+    </footer>
+
+    <script src="./js/script.js"></script>
+</body>
+
+</html>
