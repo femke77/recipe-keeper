@@ -35,7 +35,12 @@ module.exports = function(sequelize, DataTypes) {
   });
 
   User.associate = function(models) {
-    //User.hasMany(models.Recipe);
+    User.hasMany(models.Recipe);
+    User.belongsToMany(models.Recipe, {
+      as: "Saves",
+      through: "Save"
+    });
+    User.hasMany(models.Note);
   };
 
   return User;

@@ -1,0 +1,105 @@
+<!-- Recipe Form -->
+    <form class="recipe">
+        <div id="recipeForm">
+            <div class="field">
+                <label class="label">Title</label>
+                <div class="control">
+                    <input class="input" id="title" name="title" type="text" placeholder="e.g Mom's Famous Chicken Noodle Soup" required>
+                </div>
+            </div>
+            <div class="field">
+                <div class="control">
+                    <div class="select">
+                        <select id="servings" class="required" name="servings" >
+                            <option value="">Servings</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="4">4</option>
+                            <option value="6">6</option>
+                            <option value="8">8</option>
+                            <option value="10">10</option>
+                            <option value="12">12</option>
+                            <option value="16">16</option>
+                            <option value="20">20</option>
+                            <option value="24">24</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="field">
+                <div class="control">
+                    <div class="select">
+                        <select id="category" class="required" name="category">
+                            <option value="">Cuisine</option>
+                            <option value="American">American</option>
+                            <option value="Mexican">Mexican</option>
+                            <option value="Mediterranean">Mediterranean</option>
+                            <option value="Italian">Italian</option>
+                            <option value="French">French</option>
+                            <option value="German">German</option>
+                            <option value="Indian">Indian</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="field">
+                <div class="control">
+                    <div class="select">
+                        <select id="dishType" class="required" name="dishType">
+                            <option value="">Dish Type</option>
+                            <option value="Main Dish">Main Dish</option>
+                            <option value="Side Dish">Side Dish</option>
+                            <option value="Soup">Soup</option>
+                            <option value="Appetizer">Appetizer</option>
+                            <option value="Beverage">Beverage</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="field">
+                <label class="label">Source</label>
+                <div class="control">
+                    <input class="input" id="source" type="text" placeholder="e.g Taste of Home ">
+                </div>
+            </div>
+            <div class="field">
+                <label class="label">Ingredients</label>
+                <div class="control is-expanded">
+                    <input class="input required ingredient" id="ingredient" name="ingredient" type="text" placeholder="e.g 1/2 cup granulated sugar ">
+                </div>
+            </div>
+            <div id="ingredientField" class="field">
+                <!-- As many ingredient fields as needed per recipe can be generated to this div -->
+                <!-- accidental blank ingredient field left over after user input will not affect validation or submit -->
+            </div>
+            <div class="field">
+                <p class="control">
+                    <a class="button" id="addField">
+                        Add another ingredient field
+                    </a>
+                </p>
+            </div>
+            <div class="field">
+                <label class="label">Instructions</label>
+                <div class="control is-expanded">
+                    <textarea class="textarea required" name="instructions" id="instructions" placeholder="Preheat oven to 350&deg ..." rows="8"></textarea>
+                </div>
+            </div>
+            <div class="field">
+                <label class="label">Image Link (URL)</label>
+                <div class="control">
+                    <input class="input" id="image" type="text">
+                </div>
+            </div>
+            <div class="control">
+                <button class="button is-primary" id="submitRecipe">Submit</button>
+            </div>
+        </div>
+    </form>
+   
+    <!-- End Recipe Form -->
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.1/dist/jquery.validate.js"></script>
+
+<script src="js/createRecipe.js" type="text/javascript"></script>

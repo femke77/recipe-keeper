@@ -1,1 +1,1 @@
-//ajax here with js dom manuipulation as needed
+//javascript for the landing page
