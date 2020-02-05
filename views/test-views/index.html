@@ -215,6 +215,276 @@
         </div>
     </footer>
     <script src="./js/script.js"></script>
+
+    <!-- TEST START  -->
+
+    <h1>Recipes</h1>
+
+    <div class="recipeMain">
+        <!-- grab three random recipes and show them here -->
+    </div>
+
+    <!-- Uncomment the following button to use spoonacular api -->
+    <!-- <div id="recipe">
+        <button type="submit" id="btn">Click to download recipes</button>
+    </div> -->
+
+    <!-- Recipe Form -->
+    <form class="recipe">
+        <div id="recipeForm">
+            <div class="field">
+                <label class="label">Title</label>
+                <div class="control">
+                    <input class="input" id="title" name="title" type="text"
+                        placeholder="e.g Mom's Famous Chicken Noodle Soup" required>
+                </div>
+            </div>
+            <div class="field">
+                <div class="control">
+                    <div class="select">
+                        <select id="servings" class="required" name="servings">
+                            <option value="">Servings</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="4">4</option>
+                            <option value="6">6</option>
+                            <option value="8">8</option>
+                            <option value="10">10</option>
+                            <option value="12">12</option>
+                            <option value="16">16</option>
+                            <option value="20">20</option>
+                            <option value="24">24</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="field">
+                <div class="control">
+                    <div class="select">
+                        <select id="category" class="required" name="category">
+                            <option value="">Cuisine</option>
+                            <option value="American">American</option>
+                            <option value="Mexican">Mexican</option>
+                            <option value="Mediterranean">Mediterranean</option>
+                            <option value="Italian">Italian</option>
+                            <option value="French">French</option>
+                            <option value="German">German</option>
+                            <option value="Indian">Indian</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="field">
+                <div class="control">
+                    <div class="select">
+                        <select id="dishType" class="required" name="dishType">
+                            <option value="">Dish Type</option>
+                            <option value="Main Dish">Main Dish</option>
+                            <option value="Side Dish">Side Dish</option>
+                            <option value="Soup">Soup</option>
+                            <option value="Appetizer">Appetizer</option>
+                            <option value="Beverage">Beverage</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="field">
+                <label class="label">Source</label>
+                <div class="control">
+                    <input class="input" id="source" type="text" placeholder="e.g Taste of Home ">
+                </div>
+            </div>
+            <div class="field">
+                <label class="label">Ingredients</label>
+                <div class="control is-expanded">
+                    <input class="input required ingredient" id="ingredient" name="ingredient" type="text"
+                        placeholder="e.g 1/2 cup granulated sugar ">
+                </div>
+            </div>
+            <div id="ingredientField" class="field">
+                <!-- As many ingredient fields as needed per recipe can be generated to this div -->
+                <!-- accidental blank ingredient field left over after user input will not affect validation or submit -->
+            </div>
+            <div class="field">
+                <p class="control">
+                    <a class="button" id="addField">
+                        Add another ingredient field
+                    </a>
+                </p>
+            </div>
+            <div class="field">
+                <label class="label">Instructions</label>
+                <div class="control is-expanded">
+                    <textarea class="textarea required" name="instructions" id="instructions"
+                        placeholder="Preheat oven to 350&deg ..." rows="8"></textarea>
+                </div>
+            </div>
+            <!-- <div class="field">
+                <label class="label">User Notes</label>
+                <div class="control is-expanded">
+                    <textarea class="textarea required" id="userNotes" placeholder="When making this, I noticed I had to ..." rows="3"></textarea>
+                </div>
+            </div> -->
+            <div class="field">
+                <label class="label">Image Link (URL)</label>
+                <div class="control">
+                    <input class="input" id="image" type="text">
+                </div>
+            </div>
+            <div class="control">
+                <button class="button is-primary" id="submitRecipe">Submit</button>
+            </div>
+        </div>
+    </form>
+
+    <!-- End Recipe Form -->
+    <!-- SCRIPT -->
+    <script>
+        var recipeCount = 1;
+        //display 'recipeCount' random recipes and display each ingredient obj as text
+        $(document).ready(function () {
+            for (let i = 0; i < recipeCount; i++) {
+                $.get("/api/recipe", function (data) {
+                    $.each(data.ingredients, function (i, val) {
+                        $(".recipeMain").append(document.createTextNode(val), "</br>");
+                    });
+                    //idea: the instructions can look better with a line break after each '.'
+                    $(".recipeMain").append("</br>Instructions</br> ");
+                    $(".recipeMain").append(data.instructions);
+                });
+            }
+        });
+
+        //Add dynamic ingredient fields to form for creating a new recipe
+        $("#addField").on("click", function (event) {
+            event.preventDefault();
+            var html = "<div class='field' <div class='control'> <input class='input ingredient' id='ingredient' type='text'></div></div>"
+            $("#ingredientField").append(html);
+        });
+
+        //validate the form and display messages for incorrect fields if required
+        var form = $(".recipe");
+        form.validate({
+            rules: {
+                title: "required",
+                servings: "required",
+                category: "required",
+                dishType: "required",
+                ingredient: "required",
+                instructions: "required",
+            },
+            messages: {
+                title: "Please specify the title.",
+                servings: "Specify how many servings this recipe makes.",
+                category: "Please specify the cuisine type.",
+                dishType: "Please specify the type of dish.",
+                ingredient: "Please specify ingredient.",
+                instructions: "Please enter the instructions for making the recipe."
+            }
+        });
+
+        //Submit a new recipe
+        $("#submitRecipe").on("click", function (event) {
+            event.preventDefault();
+
+            if (form.valid()) {
+                console.log("valid form");
+
+                //get the user id from session
+
+                var ingredientJSON = {}
+                var count = 0;
+
+                //find all elements of class ingredient and make a json of the ingredient_count and value
+                $(".ingredient").each(function () {
+                    ingredientJSON["ingredient_" + count++] = $(this).val()
+                });
+
+
+                console.log(ingredientJSON);
+                //make a new recipe object with user id
+                let newRecipe = {
+                    title: $("#title").val().trim(),
+                    servings: $("#servings").val(),
+                    image: $("#image").val().trim(),
+                    category: $("#category").val(),
+                    dishType: $("#dishType").val(),
+                    source: $("#source").val().trim(),
+                    instructions: $("#instructions").val().trim(),
+                    ingredients: ingredientJSON,
+
+                    //userid has to come from the passport session:
+                    UserId: 1
+                }
+                console.log(newRecipe)
+                //send to database with post
+                $.post("/api/newrecipe", newRecipe, function (result) {
+                    console.log("posted")
+                });
+            }
+        });
+
+
+
+        //==========================================================================================================================================
+
+
+
+        // The following code is for increasing the size of the recipe database by hitting spoonacular api
+        var apiKey = "";
+        var num = 10;
+
+        // Button to trigger num more recipes be posted to the mysql database
+        $("#btn").on("click", function (event) {
+            event.preventDefault();
+            $.ajax({
+                url: "https://api.spoonacular.com/recipes/random?number=" + num + "&apiKey=" + apiKey,
+                method: "GET"
+            }).then(function (res) {
+                console.log(res);
+
+                for (let i = 0; i < res.recipes.length; i++) {
+                    var title = res.recipes[i].title;
+                    var servings = res.recipes[i].servings || 0;
+                    var image = res.recipes[i].image || "";
+                    var category = res.recipes[i].cuisines.length > 0 ? res.recipes[i].cuisines[0] : "";
+                    var dishType = res.recipes[i].dishTypes.length > 0 ? res.recipes[i].dishTypes[0] : "";
+                    var source = res.recipes[i].sourceName || "";
+                    var instructions = res.recipes[i].instructions;
+                    var ingredients = {};
+
+                    console.log(`${title} ${servings} ${image} ${category} ${dishType} ${source}`);
+
+                    for (let j = 0; j < res.recipes[i].extendedIngredients.length; j++) {
+                        ingredients["ingredient_" + [j]] = res.recipes[i].extendedIngredients[j].original
+                    }
+
+                    //make a new recipe object 
+                    let newRecipe = {
+                        title: title,
+                        servings: servings,
+                        image: image,
+                        category: category,
+                        dishType: dishType,
+                        source: source,
+                        instructions: instructions,
+                        ingredients: ingredients
+                        //user id will added when this is part of a user submission. null okay here for now. 
+                    }
+
+                    //send to database with post
+                    $.post("/api/newrecipe", newRecipe, function (result) {
+                        console.log("posted")
+                    });
+                }
+            });
+        });  //end #btn click for downloading recipes into db
+
+
+    </script>
+
+    <!-- TEST END  -->
+
 </body>
 
 </html>

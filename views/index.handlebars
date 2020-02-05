@@ -1,0 +1,392 @@
+{{#each recipes}}
+{{dataValues.title}}
+{{/each}}
+
+{{!-- <body>
+    <div class="container">
+
+        <!-- Start Body  -->
+        <div class="container">
+
+            <!-- Awesome Moving Bg -->
+            <div id="flow">
+                <span class="flow-1"></span>
+                <span class="flow-2"></span>
+                <span class="flow-3"></span>
+            </div>
+
+            <div class="section">
+
+                <!-- Start Search  -->
+                <div class="box">
+                    <div class="field has-addons">
+                        <div class="control is-expanded">
+                            <input class="input has-text-centered" type="search" placeholder="What are you craving?">
+                        </div>
+                        <div class="control">
+                            <a class="button is-info">Search</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- End Search  -->
+
+                <!-- Login  -->
+
+                <div class="container">
+                    <div class="columns is-centered">
+                        <div class="column">
+                            <form action="" class="box">
+                                <div class="field is-grouped">
+                                    <div class="column is-one-third">
+                                        <label for="" class="label">Email</label>
+                                        <div class="control has-icons-left">
+                                            <input type="email" placeholder="e.g. korysmithgmail.com" class="input"
+                                                required>
+                                            <span class="icon is-small is-left">
+                                                <i class="fa fa-envelope"></i>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="column is-one-third">
+                                        <label for="" class="label">Password</label>
+                                        <div class="control has-icons-left">
+                                            <input type="password" placeholder="*******" class="input" required>
+                                            <span class="icon is-small is-left">
+                                                <i class="fa fa-lock"></i>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="column is-one-third">
+                                        <div class="control has-text-centered">
+                                            <label for="" class="label">&nbsp</label>
+                                            <button class="button is-info is-centered" id="login">
+                                                Login
+                                            </button>
+                                            <button class="button is-info is-centered" id="login">
+                                                Sign-up
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <!-- End Login  -->
+
+                <!-- Multiline columns means they stack once width of screen is filled  -->
+                <div class="columns is-multiline" id="recipesBody">
+
+                    <!-- Card One -->
+                    <div class="column is-one-third">
+                        <div class="card large">
+                            <div class="card-image">
+                                <figure class="image">
+
+                                    <!-- image  -->
+                                    <img
+                                        src="https://www.cookingclassy.com/wp-content/uploads/2015/08/blueberry-pancakes-16.jpg" />
+                                </figure>
+                            </div>
+                            <div class="card-content">
+                                <div class="media">
+                                    <div class="media-content">
+                                        <p class="title is-4 no-padding">
+
+                                            NAME
+
+                                        </p>
+                                        <p class="subtitle is-6">Pancakes</p>
+                                    </div>
+                                </div>
+                                <div class="content"> {{#each recipes}}
+                                    {{dataValues.title}}
+                                    {{/each}}
+                                </div>
+                            </div>
+                        </div>
+                        <footer class="card-footer">
+                            <a href="#" class="card-footer-item">Save Recipe</a>
+                        </footer>
+                    </div>
+                    <!-- Card two -->
+                    <div class="column is-one-third">
+                        <div class="card large">
+                            <div class="card-image">
+                                <figure class="image">
+                                    <!-- image  -->
+                                    <img
+                                        src="https://asimplepantry.com/wp-content/uploads/2016/01/Easy-Mexican-Recipes-Carne-Asada-Mexican-Street-Tacos-2.jpg" />
+                                </figure>
+                            </div>
+                            <div class="card-content">
+                                <div class="media">
+                                    <div class="media-content">
+                                        <p class="title is-4 no-padding">Mexican Asada Lime Tacos</p>
+                                        <p class="subtitle is-6">Tacos</p>
+                                    </div>
+                                </div>
+                                <div class="content">
+                                    Authentic tacos created with asada meat and fresh squeezed limes
+                                </div>
+                            </div>
+                        </div>
+                        <footer class="card-footer">
+                            <a href="#" class="card-footer-item">Save Recipe</a>
+                        </footer>
+                    </div>
+
+                    <!-- One Card -->
+                    <div class="column is-one-third">
+                        <div class="card large">
+                            <div class="card-image">
+                                <figure class="image">
+
+                                    <!-- image  -->
+                                    <img
+                                        src="https://peasandcrayons.com/wp-content/uploads/2017/09/instant-pot-black-bean-dip-recipe-peas-and-crayons-.jpg" />
+                                </figure>
+                            </div>
+                            <div class="card-content">
+                                <div class="media">
+                                    <div class="media-content">
+                                        <p class="title is-4 no-padding">Vegan Chilli Bean Dip</p>
+                                        <p class="subtitle is-6">Dip</p>
+                                    </div>
+                                </div>
+                                <div class="content">
+                                    I can't believe it's vegan
+                                </div>
+                            </div>
+                        </div>
+
+                        <footer class="card-footer">
+                            <a href="#" class="card-footer-item">Save Recipe</a>
+                        </footer>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+    <script src="./js/script.js"></script>
+
+    <!-- TEST START  -->
+
+    <h1>Recipes</h1>
+
+    <div class="recipeMain">
+        <!-- grab three random recipes and show them here -->
+    </div>
+
+    <!-- Recipe Form -->
+    <form class="recipe">
+        <div id="recipeForm">
+            <div class="field">
+                <label class="label">Title</label>
+                <div class="control">
+                    <input class="input" id="title" name="title" type="text"
+                        placeholder="e.g Mom's Famous Chicken Noodle Soup" required>
+                </div>
+            </div>
+            <div class="field">
+                <div class="control">
+                    <div class="select">
+                        <select id="servings" class="required" name="servings">
+                            <option value="">Servings</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="4">4</option>
+                            <option value="6">6</option>
+                            <option value="8">8</option>
+                            <option value="10">10</option>
+                            <option value="12">12</option>
+                            <option value="16">16</option>
+                            <option value="20">20</option>
+                            <option value="24">24</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="field">
+                <div class="control">
+                    <div class="select">
+                        <select id="category" class="required" name="category">
+                            <option value="">Cuisine</option>
+                            <option value="American">American</option>
+                            <option value="Mexican">Mexican</option>
+                            <option value="Mediterranean">Mediterranean</option>
+                            <option value="Italian">Italian</option>
+                            <option value="French">French</option>
+                            <option value="German">German</option>
+                            <option value="Indian">Indian</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="field">
+                <div class="control">
+                    <div class="select">
+                        <select id="dishType" class="required" name="dishType">
+                            <option value="">Dish Type</option>
+                            <option value="Main Dish">Main Dish</option>
+                            <option value="Side Dish">Side Dish</option>
+                            <option value="Soup">Soup</option>
+                            <option value="Appetizer">Appetizer</option>
+                            <option value="Beverage">Beverage</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="field">
+                <label class="label">Source</label>
+                <div class="control">
+                    <input class="input" id="source" type="text" placeholder="e.g Taste of Home ">
+                </div>
+            </div>
+            <div class="field">
+                <label class="label">Ingredients</label>
+                <div class="control is-expanded">
+                    <input class="input required ingredient" id="ingredient" name="ingredient" type="text"
+                        placeholder="e.g 1/2 cup granulated sugar ">
+                </div>
+            </div>
+            <div id="ingredientField" class="field">
+                <!-- As many ingredient fields as needed per recipe can be generated to this div -->
+                <!-- accidental blank ingredient field left over after user input will not affect validation or submit -->
+            </div>
+            <div class="field">
+                <p class="control">
+                    <a class="button" id="addField">
+                        Add another ingredient field
+                    </a>
+                </p>
+            </div>
+            <div class="field">
+                <label class="label">Instructions</label>
+                <div class="control is-expanded">
+                    <textarea class="textarea required" name="instructions" id="instructions"
+                        placeholder="Preheat oven to 350&deg ..." rows="8"></textarea>
+                </div>
+            </div>
+            <!-- <div class="field">
+                <label class="label">User Notes</label>
+                <div class="control is-expanded">
+                    <textarea class="textarea required" id="userNotes" placeholder="When making this, I noticed I had to ..." rows="3"></textarea>
+                </div>
+            </div> -->
+            <div class="field">
+                <label class="label">Image Link (URL)</label>
+                <div class="control">
+                    <input class="input" id="image" type="text">
+                </div>
+            </div>
+            <div class="control">
+                <button class="button is-primary" id="submitRecipe">Submit</button>
+            </div>
+        </div>
+    </form>
+
+    <!-- End Recipe Form -->
+
+
+    <!-- SCRIPT -->
+    {{!-- <script>
+        var recipeCount = 1;
+        //display 'recipeCount' random recipes and display each ingredient obj as text
+        $(document).ready(function () {
+            for (let i = 0; i < recipeCount; i++) {
+                $.get("/api/recipe", function (data) {
+                    $.each(data.ingredients, function (i, val) {
+                        $(".recipeMain").append(document.createTextNode(val), "</br>");
+                    });
+                    //idea: the instructions can look better with a line break after each '.'
+                    $(".recipeMain").append("</br>Instructions</br> ");
+                    $(".recipeMain").append(data.instructions);
+                });
+            }
+        });
+
+        //Add dynamic ingredient fields to form for creating a new recipe
+        $("#addField").on("click", function (event) {
+            event.preventDefault();
+            console.log("add field works");
+            var html = "<div class='field' <div class='control'> <input class='input ingredient' id='ingredient' type='text'></div></div>"
+            $("#ingredientField").append(html);
+        });
+
+        //validate the form and display messages for incorrect fields if required
+        var form = $(".recipe");
+        form.validate({
+            rules: {
+                title: "required",
+                servings: "required",
+                category: "required",
+                dishType: "required",
+                ingredient: "required",
+                instructions: "required",
+            },
+            messages: {
+                title: "Please specify the title.",
+                servings: "Specify how many servings this recipe makes.",
+                category: "Please specify the cuisine type.",
+                dishType: "Please specify the type of dish.",
+                ingredient: "Please specify ingredient.",
+                instructions: "Please enter the instructions for making the recipe."
+            }
+        });
+
+        //Submit a new recipe
+        $("#submitRecipe").on("click", function (event) {
+            event.preventDefault();
+
+            if (form.valid()) {
+                console.log("valid form");
+
+                //get the user id from session
+
+                var ingredientJSON = {}
+                var count = 0;
+
+                //find all elements of class ingredient and make a json of the ingredient_count and value
+                $(".ingredient").each(function () {
+                    ingredientJSON["ingredient_" + count++] = $(this).val()
+                });
+
+
+                console.log(ingredientJSON);
+                //make a new recipe object with user id
+                let newRecipe = {
+                    title: $("#title").val().trim(),
+                    servings: $("#servings").val(),
+                    image: $("#image").val().trim(),
+                    category: $("#category").val(),
+                    dishType: $("#dishType").val(),
+                    source: $("#source").val().trim(),
+                    instructions: $("#instructions").val().trim(),
+                    ingredients: ingredientJSON,
+
+                    //userid has to come from the passport session:
+                    UserId: 1
+                }
+                console.log(newRecipe)
+                //send to database with post
+                $.post("/api/newrecipe", newRecipe, function (result) {
+                    console.log("posted")
+                });
+            }
+        });
+
+
+
+        //==========================================================================================================================================
+
+
+
+    </script> --}}
+
+<!-- TEST END  -->
+
+</body> --}}
