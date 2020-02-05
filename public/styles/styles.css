@@ -1,16 +1,15 @@
-
 .card {
     overflow: hidden
 }
 
 .card-image {
-    height: 350px;
+    /* height: 350px; */
     width: auto;
     overflow: hidden;
 }
 
 .card.large {
-    height: 500px;
+    height: 400px;
     -webkit-backface-visibility: hidden;
     backface-visibility: initial;
     border-radius: 5px;

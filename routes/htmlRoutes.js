@@ -10,11 +10,12 @@ var db = require("../models");
 router.get("/", (req, res) => {
   db.Recipe.findAll({
     order: db.sequelize.random(),
-    limit: 1
+    limit: 3
   }).then(function (recipes) {
     var hbsObject = {
       recipes: recipes
     };
+    console.log(hbsObject);
     res.render("index", hbsObject);
   });
 });
