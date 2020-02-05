@@ -4,7 +4,7 @@ var express = require("express");
 var router = express.Router();
 
 var db = require("../models");
-//var Op = db.sequelize.Op;
+
 const { Op } = require("sequelize");
 
 //Post a new recipe to the database
