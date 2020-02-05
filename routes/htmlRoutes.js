@@ -19,4 +19,19 @@ router.get("/", (req, res) => {
   });
 });
 
+router.get("/dashboard", (req, res) => {
+  //show all saved recipes with their notes (join)
+  res.render("dashboard");
+});
+
+router.get("/create", (req, res) => {
+  //show form to make a new recipe
+  res.render("createRecipe");
+});
+
+router.get("*", (req, res) => {
+  //show 404 page
+  res.render("404");
+});
+
 module.exports = router;
