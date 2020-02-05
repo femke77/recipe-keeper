@@ -1,12 +1,16 @@
+/* eslint-disable no-unused-vars */
 require("dotenv").config();
 var express = require("express");
+var app = express();
+var passport = require("passport");
+var session = require("express-session");
+var bodyParser = require("body-parser");
+// var env = require("dotenv").load();
 var exphbs = require("express-handlebars");
 var apiRoutes = require("./routes/apiRoutes");
 var htmlRoutes = require("./routes/htmlRoutes");
-var bodyParser = require("body-parser");
 var db = require("./models");
 
-var app = express();
 var PORT = process.env.PORT || 3000;
 
 // Middleware
@@ -14,50 +18,36 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(cookieParser());
+app.use(bodyParser.json());
+// app.use(cookieParser());
+// MIDDLEWARE FOR PASSPORT
 app.use(
   session({
-    key: "user_id",
-    secret: "somtingWrong",
-    resave: false,
-    saveUnintialized: false,
+    secret: "keyboard cat",
+    resave: true,
+    saveUninitialized: true,
     cookies: {
       expires: 600000
     }
   })
 );
+app.use(passport.initialize());
+app.use(passport.session());
+app.set("views", "../views");
 app.engine(
-  "exphbss",
+  "hbs",
   exphbs({
-    extname: "exphbs",
+    extname: ".hbs",
     defaultLayput: "layout",
     layoutDir: __dirname + "/views/layouts"
   })
 );
-app.set("view engine", "exphbs");
-app.use((req, res, next) => {
-  if (req.cookies.user_sid && !req.session.user) {
-    res.clearCookies("user_sid");
-  }
-  next();
-});
-var exphbs = {
-  userName: "",
-  loggedin: false,
-  title: " you are not logged in",
-  body: "Hello!"
-};
+app.set("view engine", ".hbs");
 
-var sessionChecker = (req, res, next) => {
-  if (req.session.user && req.cookies.user_sid) {
-    res.redirect("/dashboard");
-  } else {
-    next();
-  }
-};
 // Routes
 app.use(apiRoutes);
 app.use(htmlRoutes);
+app.use(auth);
 
 // Handlebars
 app.engine(
@@ -88,4 +78,4 @@ db.sequelize.sync(syncOptions).then(function() {
 });
 
 module.exports = app;
-module.exports = sessionChecker;
+// module.exports = sessionChecker;

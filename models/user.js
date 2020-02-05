@@ -1,5 +1,3 @@
-var bycrypt = require("bcryptjs");
-
 module.exports = function(sequelize, DataTypes) {
   var User = sequelize.define("User", {
     firstName: {
@@ -18,7 +16,7 @@ module.exports = function(sequelize, DataTypes) {
         isEmail: true
       }
     },
-    username: {
+    userName: {
       type: DataTypes.STRING,
       allowNull: false,
       unique: true,
@@ -33,21 +31,28 @@ module.exports = function(sequelize, DataTypes) {
       validate: {
         len: [6, 15]
       }
+    },
+    lastLogin: {
+      type: DataTypes.DATE
+    },
+    status: {
+      type: DataTypes.ENUM("active", "inactive"),
+      defaultValue: "active"
     }
   });
-  User.prototype.validPassword = function(password) {
-    return bycrypt.compareSync(password, this.password);
-  };
-  User.addHook("beforeCreate", function(user) {
-    user.password = bcrypt.hashSync(
-      user.password,
-      bcrypt.genSaltSync(10),
-      null
-    );
-  });
-  User.associate = function(models) {
-    User.hasMany(models.Recipe);
-  };
+  // User.prototype.validPassword = function(password) {
+  //   return bycrypt.compareSync(password, this.password);
+  // };
+  // User.addHook("beforeCreate", function(user) {
+  //   user.password = bcrypt.hashSync(
+  //     user.password,
+  //     bcrypt.genSaltSync(10),
+  //     null
+  //   );
+  // });
+  // User.associate = function(models) {
+  //   User.hasMany(models.Recipe);
+  // };
 
   return User;
 };
