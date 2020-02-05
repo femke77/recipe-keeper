@@ -138,19 +138,13 @@
     <!-- End Recipe Form -->
     <!-- SCRIPT -->
     <script>
-        var recipeCount = 1;
+       
         //display 'recipeCount' random recipes and display each ingredient obj as text
         $(document).ready(function () {
-            for (let i = 0; i < recipeCount; i++) {
-                $.get("/api/recipe", function (data) {
-                    $.each(data.ingredients, function (i, val) {
-                        $(".recipeMain").append(document.createTextNode(val), "</br>");
-                    });
-                    //idea: the instructions can look better with a line break after each '.'
-                    $(".recipeMain").append("</br>Instructions</br> ");
-                    $(".recipeMain").append(data.instructions);
-                });
-            }
+            // $.get("/api/search/cookie", function(result){
+            //     console.log(result)
+            // })
+           
         });
 
         //Add dynamic ingredient fields to form for creating a new recipe

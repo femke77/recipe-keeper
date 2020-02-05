@@ -4,12 +4,12 @@ var express = require("express");
 
 var router = express.Router();
 
-var { Recipe } = require("../models");
+var db = require("../models");
 
-//will send 3 random recipes as a combined object to handlebars for display on landing page
+//on landing page, render the index.hbs file with 3 random recipes from the db
 router.get("/", (req, res) => {
-  Recipe.findAll({
-    order: sequelize.random(),
+  db.Recipe.findAll({
+    order: db.sequelize.random(),
     limit: 3
   }).then(function(recipes) {
     res.render("index", recipes);
