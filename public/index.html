@@ -22,14 +22,10 @@
     <h1>Recipes</h1>
 
     <div class="recipeMain">
+        <!-- grab three random recipes and show them here -->        
+    </div>
 
-        <!-- grab three random recipes and show them here -->
-        
-        
-        
-        </div>
-
-    <!-- Uncomment this button to use spoonacular api -->
+    <!-- Uncomment the following button to use spoonacular api -->
     <!-- <div id="recipe">
         <button type="submit" id="btn">Click to download recipes</button>
     </div> -->
@@ -142,17 +138,22 @@
     <!-- End Recipe Form -->
     <!-- SCRIPT -->
     <script>
-
-        //display 3 random recipes (unformatted)
+        var recipeCount = 1;
+        //display 'recipeCount' random recipes and display each ingredient obj as text
         $(document).ready(function () {
-            for (let i = 0; i < 3; i++) {
+            for (let i = 0; i < recipeCount; i++) {
                 $.get("/api/recipe", function (data) {
-                    $(".recipeMain").append(JSON.stringify(data));
+                    $.each(data.ingredients, function (i, val) {
+                        $(".recipeMain").append(document.createTextNode(val), "</br>");
+                    });
+                    //idea: the instructions can look better with a line break after each '.'
+                    $(".recipeMain").append("</br>Instructions</br> ");
+                    $(".recipeMain").append(data.instructions);
                 });
             }
         });
 
-        //Add dynamic ingredient fields
+        //Add dynamic ingredient fields to form for creating a new recipe
         $("#addField").on("click", function (event) {
             event.preventDefault();
             var html = "<div class='field' <div class='control'> <input class='input ingredient' id='ingredient' type='text'></div></div>"
@@ -188,8 +189,7 @@
                 console.log("valid form");
 
                 //get the user id from session
-
-        
+                       
                 var ingredientJSON = {}
                 var count = 0;
 
