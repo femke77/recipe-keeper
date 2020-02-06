@@ -55,6 +55,23 @@ router.delete("/api/note/:id", (req, res) => {
   });
 });
 
+router.get("/api/note/:recipeId/:userId", (req, res) => {
+  db.Note.findOne({
+    where: {
+      [Op.and]: [
+        {
+          RecipeId: req.params.recipeId
+        },
+        {
+          UserId: req.params.userId
+        }
+      ]
+    }
+  }).then(function(note) {
+    res.json(note);
+  });
+});
+
 //The main form of searching the database - user enters a keyword and function returns
 //all hits that match category (cuisine type) or keyword as substring anywhere in title
 router.get("/api/search/:keyword", (req, res) => {

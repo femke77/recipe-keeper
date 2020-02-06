@@ -7,22 +7,25 @@ $(document).ready(function() {
     //get the user id from session
     var noteObj = {
       note: note,
-      RecipeId: 1,
+      RecipeId: 5,
       UserId: 1
     };
-
     $.ajax({
       type: "put",
       url: "/api/note",
       data: noteObj
     }).then(function() {
       $("#userNotes").val(" ");
-      console.log("note saved");
+      //get the note id of the note to attach to element
+      $.get("/api/note/" + note.RecipeId + "/" + note.UserId).then(function() {
+        //change this var noteDiv to whatever it really is
+        $("noteDiv").data("nodeId", result.id);
+      });
     });
   });
 
   $("#deleteNote").on("click", function() {
-    //get id from element
+    //get id from element data
     var noteId = 2;
     $.ajax({
       type: "delete",
