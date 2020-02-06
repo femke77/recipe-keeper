@@ -29,6 +29,20 @@ router.get("/api/recipe/:id", (req, res) => {
   });
 });
 
+router.put("/api/note", (req, res) => {
+  db.Note.upsert({
+    note: req.body.note,
+    RecipeId: req.body.RecipeId,
+    UserId: req.body.UserId
+  }).then(function(result) {
+    if (result) {
+      res.status(200).send("successfully updated");
+    } else {
+      res.status(200).send("successfully stored");
+    }
+  });
+});
+
 //The main form of searching the database - user enters a keyword and function returns
 //all hits that match category (cuisine type) or keyword as substring anywhere in title
 router.get("/api/search/:keyword", (req, res) => {

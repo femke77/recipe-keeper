@@ -30,7 +30,7 @@ router.get("/create", (req, res) => {
 });
 
 router.get("*", (req, res) => {
-  //show 404 page
+  //show 404 page for all pages w/o routes
   res.render("404");
 });
 
