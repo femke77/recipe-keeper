@@ -22,7 +22,7 @@ $(document).ready(function () {
 
         // Append them to drink list
         $("#recipesBody").append(
-          `<div class="column is-one-third recipe-card">
+          `<div class="column is-one-third recipe-card" id="${element.title}">
                 <div class="card large ">
                     <div class="card-image">
                         <figure class="image">
@@ -56,52 +56,51 @@ $(document).ready(function () {
   });
   // End Search Click
 
-  // Start Card Click
+  // Start Card Click to display recipe
   $(document.body).on("click", ".recipe-card", function () {
     console.log("card clicking works");
-    // Grab input from search
-    //   console.log(this.attributes);
-    //   var keyword = this.getAttribute("data-name");
-    //   console.log("keyword: " + keyword);
+    var keyword = this.getAttribute("id");
+    console.log(`id: ${keyword}`);
 
     // Send the PUT request.
-    //   $.ajax("/api/search/" + keyword, {
-    //     type: "GET"
-    //   }).then(function(response) {
-    //     $("#recipesBody").empty();
+    $.ajax("/api/search/" + keyword, {
+      type: "GET"
+    }).then(function (response) {
+      $("#recipesBody").empty();
+      console.log("empty successful");
+      const element = response[0];
 
-    //     const element = response[i];
+      // Append them to drink list
+      $("#recipesBody").append(
+        `<div class="column is-one-third">
+                        <div class="card large">
+                            <div class="card-image">
+                                <figure class="image">
+                                    <!-- image  -->
+                                    <img src="${element.image}" />
+                                </figure>
+                            </div>
+                            <div class="card-content">
+                                 <div class="media">
+                                     <div class="media-content">
+                                         <p class="title is-4 no-padding">
+                                             ${element.title}
+                                         </p>
+                                        <p class="subtitle is-6">Dish type: ${element.dishType}</p>
+                                     </div>
+                                 </div>
+                                 <div class="content">
+                                     <p>Serves: ${element.servings}</p>
 
-    //     // Append them to drink list
-    //     $("#recipesBody").append(
-    //       `<div class="column is-one-third">
-    //                   <div class="card large" id=>
-    //                       <div class="card-image">
-    //                           <figure class="image">
-    //                               <!-- image  -->
-    //                               <img src="${element.image}" />
-    //                           </figure>
-    //                       </div>
-    //                       <div class="card-content">
-    //                           <div class="media">
-    //                               <div class="media-content">
-    //                                   <p class="title is-4 no-padding">
-    //                                       ${element.title}
-    //                                   </p>
-    //                                   <p class="subtitle is-6">Dish type: ${element.dishType}</p>
-    //                               </div>
-    //                           </div>
-    //                           <div class="content">
-    //                               <p>Serves: ${element.servings}</p>
-
-    //                           </div>
-    //                       </div>
-    //                   </div>
-    //                   <footer class="card-footer">
-    //                       <a href="#" class="card-footer-item">Save Recipe</a>
-    //                   </footer>
-    //               </div>`
-    //     );
-    //   });
+                                 </div>
+                             </div>
+                         </div>
+                         <footer class="card-footer">
+                             <a href="#" class="card-footer-item">Save Recipe</a>
+                         </footer>
+                    </div>`
+      );
+      console.log("append successful");
+    });
   });
 });
