@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-require("dotenv").config();
+// git arequire("dotenv").config();
 var express = require("express");
 var app = express();
 var passport = require("passport");
@@ -10,44 +10,62 @@ var exphbs = require("express-handlebars");
 var apiRoutes = require("./routes/apiRoutes");
 var htmlRoutes = require("./routes/htmlRoutes");
 var db = require("./models");
+var path = require("path");
 
 var PORT = process.env.PORT || 3000;
 
-// Middleware
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
-app.use(express.static("public"));
+//For BodyParser
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-// app.use(cookieParser());
-// MIDDLEWARE FOR PASSPORT
 app.use(
-  session({
-    secret: "keyboard cat",
-    resave: true,
-    saveUninitialized: true,
-    cookies: {
-      expires: 600000
-    }
-  })
-);
+  session({ secret: "keyboard cat", resave: true, saveUninitialized: true })
+); // session secret
 app.use(passport.initialize());
-app.use(passport.session());
-app.set("views", "../views");
-app.engine(
-  "hbs",
-  exphbs({
-    extname: ".hbs",
-    defaultLayput: "layout",
-    layoutDir: __dirname + "/views/layouts"
-  })
-);
-app.set("view engine", ".hbs");
+app.use(passport.session()); // persistent login sessions
+app.use(express.static("public"));
+var handlebars = require("express-handlebars").create({
+  layoutsDir: path.join(__dirname, "views/layouts"),
+  // partialsDir: path.join(__dirname, "views/partials"),
+  //defaultLayout: 'layout',
+  extname: "hbs"
+});
+
+app.engine("hbs", handlebars.engine);
+app.set("view engine", "hbs");
+app.set("views", path.join(__dirname, "views"));
+
+//   app.get('/', function(req, res){
+//     res.render('signup');
+//   });
+app.use(express.static(path.join(__dirname, "public")));
+
+//Models
+var models = require("./models");
+
+//Routes
+
+var authRoute = require("./routes/user")(app);
+
+//load passport strategies
+
+require("./config/passport.js")(passport, models.user);
+
+//Sync Database
+models.sequelize.sync({ force: false }).then(function() {
+  app.listen(PORT, function(err) {
+    // var env = require('dotenv').load();
+    if (!err) {
+      console.log("Site is live");
+    } else {
+      console.log(err);
+    }
+  });
+  console.log("Nice! Database looks fine");
+});
 
 // Routes
 app.use(apiRoutes);
 app.use(htmlRoutes);
-app.use(auth);
 
 // Handlebars
 app.engine(

@@ -29,7 +29,7 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: null,
       unique: true,
       validate: {
-        len: [6, 15]
+        len: [1]
       }
     },
     lastLogin: {
@@ -40,19 +40,6 @@ module.exports = function(sequelize, DataTypes) {
       defaultValue: "active"
     }
   });
-  // User.prototype.validPassword = function(password) {
-  //   return bycrypt.compareSync(password, this.password);
-  // };
-  // User.addHook("beforeCreate", function(user) {
-  //   user.password = bcrypt.hashSync(
-  //     user.password,
-  //     bcrypt.genSaltSync(10),
-  //     null
-  //   );
-  // });
-  // User.associate = function(models) {
-  //   User.hasMany(models.Recipe);
-  // };
 
   return User;
 };
