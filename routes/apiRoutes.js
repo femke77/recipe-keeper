@@ -29,6 +29,7 @@ router.get("/api/recipe/:id", (req, res) => {
   });
 });
 
+//insert or update a note
 router.put("/api/note", (req, res) => {
   db.Note.upsert({
     note: req.body.note,
@@ -40,6 +41,17 @@ router.put("/api/note", (req, res) => {
     } else {
       res.status(200).send("successfully stored");
     }
+  });
+});
+
+//delete a note
+router.delete("/api/note/:id", (req, res) => {
+  db.Note.destroy({
+    where: {
+      id: req.params.id
+    }
+  }).then(function() {
+    res.status(200).send("note deleted");
   });
 });
 
