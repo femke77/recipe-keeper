@@ -1,11 +1,8 @@
-/* eslint-disable no-unused-vars */
-// git arequire("dotenv").config();
 var express = require("express");
 var app = express();
 var passport = require("passport");
 var session = require("express-session");
 var bodyParser = require("body-parser");
-// var env = require("dotenv").load();
 var exphbs = require("express-handlebars");
 var apiRoutes = require("./routes/apiRoutes");
 var htmlRoutes = require("./routes/htmlRoutes");
@@ -25,18 +22,12 @@ app.use(passport.session()); // persistent login sessions
 app.use(express.static("public"));
 var handlebars = require("express-handlebars").create({
   layoutsDir: path.join(__dirname, "views/layouts"),
-  // partialsDir: path.join(__dirname, "views/partials"),
-  //defaultLayout: 'layout',
   extname: "hbs"
 });
 
 app.engine("hbs", handlebars.engine);
 app.set("view engine", "hbs");
 app.set("views", path.join(__dirname, "views"));
-
-//   app.get('/', function(req, res){
-//     res.render('signup');
-//   });
 app.use(express.static(path.join(__dirname, "public")));
 
 //Models
@@ -44,6 +35,7 @@ var models = require("./models");
 
 //Routes
 
+// eslint-disable-next-line no-unused-vars
 var authRoute = require("./routes/user")(app);
 
 //load passport strategies
@@ -51,17 +43,17 @@ var authRoute = require("./routes/user")(app);
 require("./config/passport.js")(passport, models.user);
 
 //Sync Database
-models.sequelize.sync({ force: false }).then(function() {
-  app.listen(PORT, function(err) {
-    // var env = require('dotenv').load();
-    if (!err) {
-      console.log("Site is live");
-    } else {
-      console.log(err);
-    }
-  });
-  console.log("Nice! Database looks fine");
-});
+// models.sequelize.sync({ force: false }).then(function() {
+//   app.listen(PORT, function(err) {
+//     // var env = require('dotenv').load();
+//     if (!err) {
+//       console.log("Site is live");
+//     } else {
+//       console.log(err);
+//     }
+//   });
+//   console.log("Nice! Database looks fine");
+// });
 
 // Routes
 app.use(apiRoutes);

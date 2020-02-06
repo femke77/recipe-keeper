@@ -31,14 +31,14 @@ module.exports = function(sequelize, DataTypes) {
       validate: {
         len: [1]
       }
-    },
-    lastLogin: {
-      type: DataTypes.DATE
-    },
-    status: {
-      type: DataTypes.ENUM("active", "inactive"),
-      defaultValue: "active"
     }
+    // lastLogin: {
+    //   type: DataTypes.DATE
+    // },
+    // status: {
+    //   type: DataTypes.ENUM("active", "inactive"),
+    //   defaultValue: "active"
+    // }
   });
 
   return User;

@@ -1,15 +1,16 @@
+// eslint-disable-next-line no-unused-vars
 var express = require("express");
 var passport = require("passport");
 var bcrypt = require("bcrypt");
 var db = require("../models");
 console.log("routes connected");
 module.exports = function(app) {
-  app.get("/", function(req, res){
+  app.get("/", function(req, res) {
     console.log("signup");
     res.render("signup");
   });
 
-  app.post("/signup", function(req, res){
+  app.post("/signup", function(req, res) {
     var firstName = req.body.firstname;
     var lastName = req.body.lastname;
     var email = req.body.email;
@@ -19,27 +20,31 @@ module.exports = function(app) {
       firstName: firstName,
       lastName: lastName,
       email: email,
-      userName: userName,     
+      userName: userName,
       password: bcrypt.hashSync(password, bcrypt.genSaltSync(8), null)
     };
     db.User.create(newUser, function(err, userInfo) {
-      if(err) {throw err;}
+      if (err) {
+        throw err;
+      }
       console.log(userInfo);
     });
-    res.redirect("/signup");
+    res.redirect("signup");
   });
-  app.get("/login", function(req, res){
+  app.get("/login", function(req, res) {
     res.render("login");
   });
 
-  app.post("/login", function(req, res) {
-    username,
-    password;
-
-  });
-  app.post("/signup", passport.authenticate("local-signup", {
+  // eslint-disable-next-line no-unused-vars
+  // app.post("/login", function(req, res) {
+  //   username, password;
+  // });
+  app.post(
+    "/signup",
+    passport.authenticate("local-signup", {
       successRedirect: "/dashboard",
 
       failureRedirect: "/signup"
-  })
+    })
+  );
 };
