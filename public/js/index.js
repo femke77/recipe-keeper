@@ -72,9 +72,13 @@ $(document).ready(function () {
       // console.log(element.ingredients);
 
       // Handling ingredients list 
-      const values = Object.values(element.ingredients);
-      console.log("values: " + values);
-      console.log(values.length);
+      const valuesIng = Object.values(element.ingredients);
+      console.log("values: " + valuesIng);
+      console.log(valuesIng.length);
+
+      // Handling Directions
+      // const valuesDir = Object.values(element.Directions)
+      console.log(element.instructions);
 
       // Append them to food list
       $("#recipesBody").append(
@@ -136,7 +140,7 @@ $(document).ready(function () {
             </div>
             <div class="content" id="recDirections">
               <ol>
-
+${element.instructions}
               </ol>
             </div>
             <iframe width="auto" height="auto" src="https://www.youtube.com/embed/PYwzW6CCxJU"
@@ -152,13 +156,22 @@ $(document).ready(function () {
       console.log("append works");
 
       // Handles recipes list
-      for (let j = 0; j < values.length; j++) {
-        const ing = "<li>" + values[j] + "</li>";
+      for (let j = 0; j < valuesIng.length; j++) {
+        const ing = "<li>" + valuesIng[j] + "</li>";
         $("#recList").append(
           ing
         );
-      };
+      }
       console.log("test recList population successful");
+
+      // Handles Directions population
+      // for (let k = 0; k < values.length; k++) {
+      //   const dir = "<li>" + values[k] + "</li>";
+      //   $("#recDirections").append(
+      //     dir
+      //   );
+      // };
+      // console.log("test recDirections population successful");
     });
   });
 });
