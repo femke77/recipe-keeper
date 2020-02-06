@@ -1,36 +1,29 @@
+/* eslint-disable prettier/prettier */
 //javascript for the landing page
-
-// On Search Click
-$("#searchButton").on("click", function () {
-    console.log("button works");
+$(document).ready(function () {
+  // On Search Click
+  $("#searchButton").on("click", function () {
+    console.log("search works");
 
     // Grab input from search
     var keyword = $("#searchInput")
-        .val()
-        .trim();
+      .val()
+      .trim();
     console.log(keyword);
 
-    // // Send the PUT request.
+    // // Send the GET request.
     $.ajax("/api/search/" + keyword, {
-        type: "GET"
+      type: "GET"
     }).then(function (response) {
-        $("#recipesBody").empty();
+      $("#recipesBody").empty();
 
-        // Recipe Response setting to 3
-        // var recipeCount = 3;
+      for (let i = 0; i < response.length; i++) {
+        const element = response[i];
 
-        // if (response.length < 3) {
-        //     recipeCount = response.length;
-        // }
-
-        for (let i = 0; i < response.length; i++) {
-            const element = response[i];
-
-            // Append them to drink list
-            $("#recipesBody").append(
-                // Dynamically creates cards using ES6 (ECMAscript 6), which doesn't require template literals
-                `<div class="column is-one-third">
-                <div class="card large">
+        // Append them to drink list
+        $("#recipesBody").append(
+          `<div class="column is-one-third recipe-card">
+                <div class="card large ">
                     <div class="card-image">
                         <figure class="image">
                             <!-- image  -->
@@ -56,11 +49,59 @@ $("#searchButton").on("click", function () {
                     <a href="#" class="card-footer-item">Save Recipe</a>
                 </footer>
             </div>`
-            );
-        }
-
-        console.log(recipeCount);
-        console.log(response);
-        console.log(`id ${response[0].id}`);
+        );
+        $(".recipe-card").data("recipe", element);
+      }
     });
+  });
+  // End Search Click
+
+  // Start Card Click
+  $(document.body).on("click", ".recipe-card", function () {
+    console.log("card clicking works");
+    // Grab input from search
+    //   console.log(this.attributes);
+    //   var keyword = this.getAttribute("data-name");
+    //   console.log("keyword: " + keyword);
+
+    // Send the PUT request.
+    //   $.ajax("/api/search/" + keyword, {
+    //     type: "GET"
+    //   }).then(function(response) {
+    //     $("#recipesBody").empty();
+
+    //     const element = response[i];
+
+    //     // Append them to drink list
+    //     $("#recipesBody").append(
+    //       `<div class="column is-one-third">
+    //                   <div class="card large" id=>
+    //                       <div class="card-image">
+    //                           <figure class="image">
+    //                               <!-- image  -->
+    //                               <img src="${element.image}" />
+    //                           </figure>
+    //                       </div>
+    //                       <div class="card-content">
+    //                           <div class="media">
+    //                               <div class="media-content">
+    //                                   <p class="title is-4 no-padding">
+    //                                       ${element.title}
+    //                                   </p>
+    //                                   <p class="subtitle is-6">Dish type: ${element.dishType}</p>
+    //                               </div>
+    //                           </div>
+    //                           <div class="content">
+    //                               <p>Serves: ${element.servings}</p>
+
+    //                           </div>
+    //                       </div>
+    //                   </div>
+    //                   <footer class="card-footer">
+    //                       <a href="#" class="card-footer-item">Save Recipe</a>
+    //                   </footer>
+    //               </div>`
+    //     );
+    //   });
+  });
 });
