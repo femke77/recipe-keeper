@@ -14,7 +14,7 @@ h1 {
 }
 
 .card.large {
-    height: 450px;
+    height: auto;
     -webkit-backface-visibility: hidden;
     backface-visibility: initial;
     border-radius: 5px;

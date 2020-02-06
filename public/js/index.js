@@ -76,15 +76,6 @@ $(document).ready(function () {
       console.log("values: " + values);
       console.log(values.length);
 
-      for (let j = 0; j < values.length; j++) {
-        const ing = "<li> ${values[" + j + "]}</li>";
-        // console.log("js works: " + ing);
-        // ing = ing;
-        console.log("this is the test recipe");
-      }
-      // console.log("sees outside of scope: " + ing);
-
-
       // Append them to food list
       $("#recipesBody").append(
         `<div class="column is-one-third">
@@ -127,14 +118,8 @@ $(document).ready(function () {
                         </div>
                     </div>
                     <div class="content">
-                        <ul>
-                        TEST RECIPE
-                        
-    <li>${values[1]}</li>
-    <li>${values[3]}</li>
-    END TEST RECIPE
-    
-                        </ul >
+                        <ul id="recList">
+          </ul >
                     </div >
                 </div >
             </div >
@@ -149,25 +134,9 @@ $(document).ready(function () {
               <hr>
                         </div>
             </div>
-            <div class="content">
+            <div class="content" id="recDirections">
               <ol>
-                <li>
-                  Combine milk with vinegar in a medium bowl and set aside for 5 minutes to
-                  "sour".
-                            </li>
-                <li>
-                  Combine flour, sugar, baking powder, baking soda, and salt in a large mixing
-                  bowl. Whisk egg and butter into "soured" milk. Pour the flour mixture into
-                  the wet ingredients and whisk until lumps are gone.
-                            </li>
-                <li>
-                  Heat a large skillet over medium heat, and coat with cooking spray. Pour 1/4
-                  cupfuls of batter onto the skillet, and cook until bubbles appear on the
-                  surface. Flip with a spatula, and cook until browned on the other side.
-                            </li>
-                <li>
-                  Sprinkle booberries on top, and swirl pancake sauce until delicious!
-                            </li>
+
               </ol>
             </div>
             <iframe width="auto" height="auto" src="https://www.youtube.com/embed/PYwzW6CCxJU"
@@ -180,7 +149,16 @@ $(document).ready(function () {
       </div>
       `
       );
-      console.log("append successful");
+      console.log("append works");
+
+      // Handles recipes list
+      for (let j = 0; j < values.length; j++) {
+        const ing = "<li>" + values[j] + "</li>";
+        $("#recList").append(
+          ing
+        );
+      };
+      console.log("test recList population successful");
     });
   });
 });
