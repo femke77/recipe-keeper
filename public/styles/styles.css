@@ -7,6 +7,11 @@ h1 {
     font-size: 60px;
 }
 
+h2 {
+    font-family: "Zenon Bold Italic", Helvetica, sans-serif;
+    font-size: 30px;
+}
+
 .card-image {
     /* height: 350px; */
     width: auto;

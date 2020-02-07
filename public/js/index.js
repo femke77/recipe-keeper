@@ -58,9 +58,9 @@ $(document).ready(function () {
 
   // Start Card Click to display recipe
   $(document.body).on("click", ".recipe-card", function () {
-    console.log("card clicking works");
+    // console.log("card clicking works");
     var keyword = this.getAttribute("id");
-    console.log(`id: ${keyword}`);
+    // console.log(`id: ${keyword}`);
 
     // Send the PUT request.
     $.ajax("/api/search/" + keyword, {
@@ -137,12 +137,7 @@ $(document).ready(function () {
               <ol id="recDirections">
               </ol>
             </div>
-            <iframe width="auto" height="auto" src="https://www.youtube.com/embed/PYwzW6CCxJU"
-              frameborder="0"
-              allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-              allowfullscreen></iframe>
           </div>
-
         </div>
       </div>
       `

@@ -1,17 +1,70 @@
-   <div class="field">
-        <label class="label">User Notes</label>
-            <div class="control is-expanded">
-                <textarea class="textarea required" id="userNotes" placeholder="When making this, I noticed I had to ..." rows="3"></textarea>
+<div class="container">
+    <!-- Start Body  -->
+    <div class="container">
+        <!-- Awesome Moving Bg -->
+        <div id="flow">
+            <span class="flow-1"></span>
+            <span class="flow-2"></span>
+            <span class="flow-3"></span>
+        </div>
+        <div class="section">
+            <!-- Start Search  -->
+            <div class="box">
+                <div class="field has-addons">
+                    <div class="control is-expanded">
+                        <input class="input has-text-centered" id="searchInput" type="search"
+                            placeholder="What are you craving?">
+                    </div>
+                    <div class="control">
+                        <a class="button is-info" id="searchButton">Search</a>
+                    </div>
+                </div>
             </div>
-    </div> 
-    <div>
-        {{!-- use find or create to update or create --}}
-        <button type="submit" id="saveNote">Save Note</button>
-        <button type="submit" id="deleteNote">Delete Note</button>
+            <!-- End Search  -->
+
+            <!-- Multiline columns means they stack once width of screen is filled  -->
+            <div class="container has-text-centered">
+                <h2>Your Crave Faves</h2>
+                <br>
+            </div>
+            <div class="columns is-multiline" id="recipesBody">
+                {{#each recipes}}
+                <!-- Card One -->
+                <div class="column is-one-third recipe-card" id="{{dataValues.title}}">
+                    <div class=" card large" id={{dataValues.id}}>
+                        <div class="card-image">
+                            <figure class="image">
+                                <!-- image  -->
+                                <img src="{{dataValues.image}}" />
+                            </figure>
+                        </div>
+                        <div class="card-content">
+                            <div class="media">
+                                <div class="media-content">
+                                    <p class="title is-4 no-padding">
+                                        {{dataValues.title}}
+                                    </p>
+                                    <p class="subtitle is-6">Dish type: {{dataValues.dishType}}</p>
+                                </div>
+                            </div>
+                            <div class="content">
+                                <p>Serves: {{dataValues.servings}}</p>
+
+                            </div>
+                        </div>
+                    </div>
+                    <footer class="card-footer">
+                        <a href="#" class="card-footer-item">Fave this Recipe</a>
+                        <a href="#" class="card-footer-item">Remove from Faves</a>
+                    </footer>
+                </div>
+
+                {{/each}}
+            </div>
+        </div>
     </div>
-
-
+</div>
 
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="js/dashboard.js" type="text/javascript"></script>
+<script src="/js/dashboard.js"></script>

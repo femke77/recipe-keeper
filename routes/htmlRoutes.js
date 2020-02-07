@@ -11,7 +11,7 @@ router.get("/", (req, res) => {
   db.Recipe.findAll({
     order: db.sequelize.random(),
     limit: 3
-  }).then(function(recipes) {
+  }).then(function (recipes) {
     var hbsObject = {
       recipes: recipes
     };
@@ -20,10 +20,27 @@ router.get("/", (req, res) => {
   });
 });
 
+// TEST (un note later)
+// router.get("/dashboard", (req, res) => {
+//   //show all saved recipes with their notes (join)
+//   res.render("dashboard");
+// });
+// END TEST
+
+// TEST
 router.get("/dashboard", (req, res) => {
-  //show all saved recipes with their notes (join)
-  res.render("dashboard");
+  db.Recipe.findAll({
+    order: db.sequelize.random(),
+    limit: 3
+  }).then(function (recipes) {
+    var hbsObject = {
+      recipes: recipes
+    };
+    console.log(hbsObject);
+    res.render("dashboard", hbsObject);
+  });
 });
+// END TEST
 
 router.get("/create", (req, res) => {
   //show form to make a new recipe
