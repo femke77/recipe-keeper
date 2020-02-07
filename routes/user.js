@@ -44,11 +44,10 @@ router.post("/login", function(req, res) {
       req.authenticated = true;
       return res.redirect("/test");
     });
-    //console.log( req.body );
-    //res.redirect( '/' );
   })(req, res);
 });
 router.get("/logout", function(req, res) {
+  // eslint-disable-next-line no-unused-vars
   req.session.destroy(function(err) {
     res.redirect("/");
   });
