@@ -69,14 +69,11 @@ $(document).ready(function () {
       $("#recipesBody").empty();
       console.log("empty successful");
       const element = response[0];
-      // console.log(element.ingredients);
 
       // Handling ingredients list 
       const valuesIng = Object.values(element.ingredients);
       console.log("values: " + valuesIng);
       console.log(valuesIng.length);
-
-      // Handling Directions
 
       // Append them to food list
       $("#recipesBody").append(
@@ -150,7 +147,6 @@ $(document).ready(function () {
       </div>
       `
       );
-      console.log("append works");
 
       // Handles recipes list
       for (let j = 0; j < valuesIng.length; j++) {
@@ -161,51 +157,18 @@ $(document).ready(function () {
       }
       console.log("test recList population successful");
 
-      // Instructions WORKS --------------------------------------------1
-      // var instructions = [element.instructions];
-
-      // (doesnt work)
-      // instructions = instructions.replace(/./g, "....."); 
-      // $("#recDirections").append(
-      // "instructions should populate here:" + instructions
-      // );
-      // console.log(`instructions population works: ${instructions}`);
-      // END Instructions WORKS------------------------------------------1
-
-      // Instructions DOESNT WORK-----------------------------------------2
-      // var instructions = element.instructions;
-      // console.log(element.instructions);
-
-      // (doesnt work)
-      // instructions = instructions.replace(/./g, "<li>");
-      // test 
-      // instructions = instructions.replace(/\./g, "<li>");
-      // $("#recDirections").append(
-      //   instructions
-      // );
-      // console.log(`instructions population works: ${instructions}`);
-      // END Instructions DOESNT WORK--------------------------------------2
-
-      // START---  instructions test  WORKING --------------------------------------3 
+      // START---  instructions listing  WORKING --------------------------------------3 
       var instructions = element.instructions;
       var a1 = new Array();
       a1 = instructions.split(".");
-      // console.log(a1);
       console.log("length is: " + a1.length);
-      // (doesnt work)
-      // instructions = instructions.replace(/./g, "....."); 
-      // $("#recDirections").append(
-      //   "instructions should populate here:" + a1
-      // );
-
-      for (let k = 1; k < a1.length; k++) {
+      for (let k = 0; k < a1.length - 1; k++) {
         const instrucDisplay = "<li>" + a1[k] + "</li>";
         $("#recDirections").append(
           instrucDisplay
         );
       }
-      // console.log(`instructions population works: ${instructions}`);
-      // END --- instructions test WORKING ----------------------------------------3
+      // END --- instructions WORKING ----------------------------------------3
     });
   });
 });
