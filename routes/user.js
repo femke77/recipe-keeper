@@ -14,10 +14,10 @@ router.post("/signup", function(req, res, next) {
     }
     if (!user) {
       // console.log( 'User not registered' );
-      return res.redirect("/user/signup");
+      return res.redirect("/signup");
     }
     // console.log( 'User registered!' );
-    return res.redirect("/dashboard");
+    return res.redirect("/test");
     //res.redirect( '/' );
   })(req, res, next);
 });
@@ -42,7 +42,7 @@ router.post("/login", function(req, res) {
       req.session.messages = "Login successfull";
       req.session.authenticated = true;
       req.authenticated = true;
-      return res.redirect("/");
+      return res.redirect("/test");
     });
     //console.log( req.body );
     //res.redirect( '/' );
@@ -53,4 +53,5 @@ router.get("/logout", function(res, req) {
     res.redirect("/login");
   });
 });
+
 module.exports = router;

@@ -6,10 +6,19 @@ var router = express.Router();
 
 var exports = (module.exports = {});
 
+function isLoggedIn(req, res, next) {
+  if (req.isAuthenticated()) {
+    return next();
+  }
+  res.redirect("/login");
+}
 exports.signup = function(req, res) {
   res.render("signup");
 };
-
+router.get("/test", isLoggedIn, function(req, res) {
+  console.log(req.user);
+  res.send("Hello");
+});
 // var sessionChecker = require("../server");
 // var exphbs = require("../server");
 

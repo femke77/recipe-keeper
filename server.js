@@ -40,7 +40,6 @@ app.use(authRoutes);
 //load passport strategies
 require("./config/passport.js")(passport, db.User);
 
-
 var syncOptions = { force: false };
 
 // If running a test, set syncOptions.force to true
