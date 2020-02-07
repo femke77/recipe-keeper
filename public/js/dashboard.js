@@ -3,27 +3,19 @@
 //javascript for the landing page
 $(document).ready(function () {
     // On Search Click
-    $("#searchButton").on("click", function () {
-        console.log("search works");
+    var userid = 1;
+    // // Send the GET request.
+    $.ajax("/api/saved/" + userid, {
+        type: "GET"
+    }).then(function (response) {
+        $("#recipesBody").empty();
 
-        // Grab input from search
-        var keyword = $("#searchInput")
-            .val()
-            .trim();
-        console.log(keyword);
+        for (let i = 0; i < response.length; i++) {
+            const element = response[i];
 
-        // // Send the GET request.
-        $.ajax("/api/search/" + keyword, {
-            type: "GET"
-        }).then(function (response) {
-            $("#recipesBody").empty();
-
-            for (let i = 0; i < response.length; i++) {
-                const element = response[i];
-
-                // Append them to drink list
-                $("#recipesBody").append(
-                    `<div class="column is-one-third recipe-card" id="${element.title}">
+            // Append them to food list
+            $("#recipesBody").append(
+                `<div class="column is-one-third recipe-card" id="${element.title}">
                   <div class="card large ">
                       <div class="card-image">
                           <figure class="image">
@@ -47,16 +39,16 @@ $(document).ready(function () {
                       </div>
                   </div>
                   <footer class="card-footer">
-                      <a href="#" class="card-footer-item">Fave this Recipe</a>
+                      <a href="#" class="card-footer-item">Add a Note</a>
                       <a href="#" class="card-footer-item">Remove from Faves</a>
                   </footer>
               </div>`
-                );
-                $(".recipe-card").data("recipe", element);
-            }
-        });
+            );
+            $(".recipe-card").data("recipe", element);
+        }
     });
     // End Search Click
+    console.log("populated at beginning");
 
     // Start Card Click to display recipe
     $(document.body).on("click", ".recipe-card", function () {
@@ -103,7 +95,7 @@ $(document).ready(function () {
                   </div>
               </div>
               <footer class="card-footer">
-                  <a href="#" class="card-footer-item">Fave this Recipe</a>
+                  <a href="#" class="card-footer-item">Add a Note</a>
                   <a href="#" class="card-footer-item">Remove from Faves</a>
               </footer>
               </div>
@@ -170,6 +162,8 @@ $(document).ready(function () {
             // END --- instructions WORKING ----------------------------------------3
         });
     });
+
+    // Note clicking 
     $("#saveNote").on("click", function () {
         var note = $("#userNotes")
             .val()

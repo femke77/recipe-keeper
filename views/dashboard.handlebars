@@ -28,38 +28,7 @@
                 <br>
             </div>
             <div class="columns is-multiline" id="recipesBody">
-                {{#each recipes}}
-                <!-- Card One -->
-                <div class="column is-one-third recipe-card" id="{{dataValues.title}}">
-                    <div class=" card large" id={{dataValues.id}}>
-                        <div class="card-image">
-                            <figure class="image">
-                                <!-- image  -->
-                                <img src="{{dataValues.image}}" />
-                            </figure>
-                        </div>
-                        <div class="card-content">
-                            <div class="media">
-                                <div class="media-content">
-                                    <p class="title is-4 no-padding">
-                                        {{dataValues.title}}
-                                    </p>
-                                    <p class="subtitle is-6">Dish type: {{dataValues.dishType}}</p>
-                                </div>
-                            </div>
-                            <div class="content">
-                                <p>Serves: {{dataValues.servings}}</p>
 
-                            </div>
-                        </div>
-                    </div>
-                    <footer class="card-footer">
-                        <a href="#" class="card-footer-item">Fave this Recipe</a>
-                        <a href="#" class="card-footer-item">Remove from Faves</a>
-                    </footer>
-                </div>
-
-                {{/each}}
             </div>
         </div>
     </div>
