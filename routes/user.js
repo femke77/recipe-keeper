@@ -1,50 +1,56 @@
 // eslint-disable-next-line no-unused-vars
 var express = require("express");
+var router = express.Router();
 var passport = require("passport");
-var bcrypt = require("bcrypt");
-var db = require("../models");
-console.log("routes connected");
-module.exports = function(app) {
-  app.get("/", function(req, res) {
-    console.log("signup");
-    res.render("signup");
-  });
 
-  app.post("/signup", function(req, res) {
-    var firstName = req.body.firstname;
-    var lastName = req.body.lastname;
-    var email = req.body.email;
-    var userName = req.body.username;
-    var password = req.body.password;
-    var newUser = {
-      firstName: firstName,
-      lastName: lastName,
-      email: email,
-      userName: userName,
-      password: bcrypt.hashSync(password, bcrypt.genSaltSync(8), null)
-    };
-    db.User.create(newUser, function(err, userInfo) {
-      if (err) {
-        throw err;
+router.get("/", function(req, res) {
+  res.render("signup");
+});
+
+router.post("/signup", function(req, res, next) {
+  passport.authenticate("signup", function(err, user) {
+    if (err) {
+      return next(err);
+    }
+    if (!user) {
+      // console.log( 'User not registered' );
+      return res.redirect("/user/signup");
+    }
+    // console.log( 'User registered!' );
+    return res.redirect("/dashboard");
+    //res.redirect( '/' );
+  })(req, res, next);
+});
+router.get("/login", function(req, res) {
+  res.render("login");
+});
+
+router.post("/login", function(req, res) {
+  passport.authenticate("login", function(err, user) {
+    if (err) {
+      return next(err);
+    }
+    if (!user) {
+      console.log("User not authenticated");
+      return res.redirect("/user/login");
+    }
+    req.logIn(user, function(loginerr) {
+      if (loginerr) {
+        console.log("Error while login: " + loginerr);
+        return next(loginerr);
       }
-      console.log(userInfo);
+      req.session.messages = "Login successfull";
+      req.session.authenticated = true;
+      req.authenticated = true;
+      return res.redirect("/");
     });
-    res.redirect("signup");
+    //console.log( req.body );
+    //res.redirect( '/' );
+  })(req, res);
+});
+router.get("/logout", function(res, req) {
+  req.session.destroy(function() {
+    res.redirect("/login");
   });
-  app.get("/login", function(req, res) {
-    res.render("login");
-  });
-
-  // eslint-disable-next-line no-unused-vars
-  // app.post("/login", function(req, res) {
-  //   username, password;
-  // });
-  app.post(
-    "/signup",
-    passport.authenticate("local-signup", {
-      successRedirect: "/dashboard",
-
-      failureRedirect: "/signup"
-    })
-  );
-};
+});
+module.exports = router;
