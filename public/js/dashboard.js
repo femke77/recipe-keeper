@@ -39,8 +39,8 @@ $(document).ready(function () {
                       </div>
                   </div>
                   <footer class="card-footer">
-                      <a href="#" class="card-footer-item">Add a Note</a>
                       <a href="#" class="card-footer-item">Remove from Faves</a>
+                      
                   </footer>
               </div>`
             );
@@ -95,8 +95,8 @@ $(document).ready(function () {
                   </div>
               </div>
               <footer class="card-footer">
-                  <a href="#" class="card-footer-item">Add a Note</a>
-                  <a href="#" class="card-footer-item">Remove from Faves</a>
+                  <a class="card-footer-item" id="openModal">Add a Note</a>
+                  <a class="card-footer-item">Remove from Faves</a>
               </footer>
               </div>
           </div>
@@ -199,4 +199,10 @@ $(document).ready(function () {
             console.log("note deleted");
         });
     });
+
+    $(document.body).on("click", "#openModal", function () {
+        $(".modal").addClass("is-active");
+        console.log("modal pops");
+    });
+
 });

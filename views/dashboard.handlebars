@@ -34,6 +34,32 @@
     </div>
 </div>
 
+{{!-- modal  --}}
+<div class="modal" id="yerNotes">
+    <div class="modal-background"></div>
+    <div class="modal-card">
+        <header class="modal-card-head">
+            <p class="modal-card-title">Modal title</p>
+            <button class="delete" aria-label="close"></button>
+        </header>
+        <section class="modal-card-body">
+            <!-- Content ... -->
+            <div class="field">
+                <label class="label">User Notes</label>
+                <div class="control is-expanded">
+                    <textarea class="textarea required" id="userNotes"
+                        placeholder="This was delicious, it was refreshing for a summer day..." rows="3"></textarea>
+                </div>
+            </div>
+        </section>
+        {{!-- End Content  --}}
+        <footer class="modal-card-foot">
+            <button class="button is-info" id="saveNote">Save changes</button>
+            <button class="button">Cancel</button>
+        </footer>
+    </div>
+</div>
+{{!-- end modal  --}}
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="/js/dashboard.js"></script>
