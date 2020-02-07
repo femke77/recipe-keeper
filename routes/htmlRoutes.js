@@ -51,6 +51,10 @@ router.get("/recipe", (req, res) => {
   res.render("recipe");
 });
 
+router.get("/signup", (req, res) => {
+  res.render("signup");
+});
+
 router.get("*", (req, res) => {
   //show 404 page for all pages w/o routes
   res.render("404");

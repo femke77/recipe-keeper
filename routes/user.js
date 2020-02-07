@@ -3,7 +3,7 @@ var express = require("express");
 var router = express.Router();
 var passport = require("passport");
 
-router.get("/", function(req, res) {
+router.get("/signup", function(req, res) {
   res.render("signup");
 });
 
@@ -17,7 +17,7 @@ router.post("/signup", function(req, res, next) {
       return res.redirect("/signup");
     }
     // console.log( 'User registered!' );
-    return res.redirect("/test");
+    return res.redirect("/dashboard");
     //res.redirect( '/' );
   })(req, res, next);
 });
