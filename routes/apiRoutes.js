@@ -45,9 +45,6 @@ router.post("/api/save/:userId/:recipeId", (req, res) => {
   });
 });
 
-// await user.setRecipes([recipeId])
-// const recipes = await user.getRecipes();
-
 //return recipe with the requested id
 router.get("/api/recipe/:id", (req, res) => {
   db.Recipe.findOne({

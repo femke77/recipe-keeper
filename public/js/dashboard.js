@@ -34,4 +34,8 @@ $(document).ready(function() {
       console.log("note deleted");
     });
   });
+
+  $("#showmodal").on("click", function() {
+    $(".modal").addClass("is-active");
+  });
 });
