@@ -59,11 +59,11 @@ $(document).ready(function () {
   // Start Card Click to display recipe
   $(document.body).on("click", ".recipe-card", function () {
     console.log("card clicking works");
-    var keyword = this.getAttribute("id");
-    console.log(`id: ${keyword}`);
+    var recipeTitle = this.getAttribute("id");
+    console.log(`id: ${recipeTitle}`);
 
     // Send the PUT request.
-    $.ajax("/api/search/" + keyword, {
+    $.ajax("/api/search/" + recipeTitle, {
       type: "GET"
     }).then(function (response) {
       $("#recipesBody").empty();
@@ -75,6 +75,7 @@ $(document).ready(function () {
       console.log("values: " + valuesIng);
       console.log(valuesIng.length);
 
+      $(".recipesBody").data("recipe", element);
       // Append them to food list
       $("#recipesBody").append(
         `<div class="column is-one-third">
@@ -148,7 +149,7 @@ $(document).ready(function () {
       `
       );
 
-      // Handles recipes list
+      // Handles ingredients list
       for (let j = 0; j < valuesIng.length; j++) {
         const ing = "<li>" + valuesIng[j] + "</li>";
         $("#recList").append(

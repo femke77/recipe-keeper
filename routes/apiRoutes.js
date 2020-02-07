@@ -18,6 +18,23 @@ router.post("/api/newrecipe", (req, res) => {
   });
 });
 
+router.get("/api/saved/:userId", (req, res) => {
+  db.User.findOne({
+    where: {
+      id: req.params.userId
+    }
+  })
+    .then(function(user) {
+      return (recipes = user.getSaves());
+    })
+    .then(function(recipes) {
+      res.json(recipes);
+    });
+});
+
+// await user.setRecipes([recipeId])
+// const recipes = await user.getRecipes();
+
 //return recipe with the requested id
 router.get("/api/recipe/:id", (req, res) => {
   db.Recipe.findOne({
