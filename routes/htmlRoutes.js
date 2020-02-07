@@ -3,7 +3,7 @@
 var express = require("express");
 //var app = require("../server");
 var router = express.Router();
-
+var db = require("../models");
 var exports = (module.exports = {});
 
 function isLoggedIn(req, res, next) {
@@ -19,39 +19,41 @@ router.get("/test", isLoggedIn, function(req, res) {
   console.log(req.user);
   res.send("Hello");
 });
-// var sessionChecker = require("../server");
-// var exphbs = require("../server");
 
-// router.get("/", (req, res) => {
-//   res.render("index");
-// });
-// // for sign up page
-// router
-//   .route("../signup")
-//   .get((req, res) => {
-//     res.render("signup", exphbs);
-//   })
-//   .post((req, res) => {
-//     User.create({
-//       username: req.body.username,
-//       password: req.body.password
-//     })
-//       .then(username => {
-//         req.session.user = user.dataValues;
-//         res.render("/dashboard", { "user:": username });
-//       })
-//       .catch(error => {
-//         res.render("/signup");
-//       });
-//   });
-//   // route for user login
-// router
-//   .route("/login")
-//   .get((req, res) => {
-//     res.render("login", exphbs);
-//   })
-//   .post((req, res) => {
-//     var username = req.body.username;
-//     var password = req.body.password;
-//   });
+//on landing page, render the index.hbs file with x number of  random recipes from the db
+router.get("/", (req, res) => {
+  db.Recipe.findAll({
+    order: db.sequelize.random(),
+    limit: 3
+  }).then(function(recipes) {
+    var hbsObject = {
+      recipes: recipes
+    };
+    console.log(hbsObject);
+    res.render("index", hbsObject);
+  });
+});
+
+// TEST (un note later)
+router.get("/dashboard", (req, res) => {
+  //show all saved recipes with their notes (join)
+  res.render("dashboard");
+});
+// END TEST
+
+router.get("/create", (req, res) => {
+  //show form to make a new recipe
+  res.render("createRecipe");
+});
+
+router.get("/recipe", (req, res) => {
+  //show all saved recipes with their notes (join)
+  res.render("recipe");
+});
+
+router.get("*", (req, res) => {
+  //show 404 page for all pages w/o routes
+  res.render("404");
+});
+
 module.exports = router;

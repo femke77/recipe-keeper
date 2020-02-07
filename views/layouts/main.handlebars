@@ -1,18 +1,73 @@
 <!DOCTYPE html>
 <html>
 
-  <head>
-    <meta charset="utf-8">
-    <link rel="stylesheet"
-      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css">
-    {{!-- need to add node modules bulma.css file --}}
-    <link rel="stylesheet" href="/styles/styles.css" media="screen" title="no
-      title" charset="utf-8">
-    <title>Home Page</title>
-  </head>
+<head>
+  <meta charset="utf-8">
 
-  <body>
-    {{{body}}}
-  </body>
+  <!-- Viewport required with Bulma  -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Crave Recipes</title>
+
+  <!-- Styling (Bulma, Font Awesome, Custom -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css">
+  <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+  <link rel="stylesheet" href="../styles/styles.css">
+
+  {{!-- JQuery and JQ Validate --}}
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.1/dist/jquery.validate.js"></script>
+</head>
+
+<body>
+  <nav class="navbar">
+    <div class="container">
+      <div class="navbar-brand">
+
+        <!-- Cookie Link  -->
+        <a class="navbar-item" href="/">
+
+          <!-- Cookie  -->
+          <i class="fas fa-cookie-bite fa-5x"></i>
+        </a>
+        <h1>Crave Recipes</h1>
+        <span class="navbar-burger burger" data-target="navbarMenu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </span>
+      </div>
+      <div id="navbarMenu" class="navbar-menu">
+        <div class="navbar-end">
+
+          <a href="./dashboard" class="navbar-item">
+            Dashboard
+          </a>
+          <a href="./create" class="navbar-item">
+            Create a Recipe
+          </a>
+          <a href="/" class="navbar-item">
+            About us
+          </a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  {{{body}}}
+
+  <footer class="footer">
+    <div class="container">
+      <div class="content has-text-centered">
+        <div class="soc">
+          <a href="#"><i class="fab fa-github fa-3x" aria-hidden="true"></i></a>
+        </div>
+        <strong>Crave Recipes</strong> by Meg Meyers, Kory, and Miguel Delos
+        Santos.
+      </div>
+    </div>
+  </footer>
+
+  <script src="/js/burgerscript.js"></script>
+</body>
 
 </html>
