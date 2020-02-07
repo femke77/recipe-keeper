@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 //api routing
 var express = require("express");
 
@@ -13,10 +14,27 @@ router.post("/api/newrecipe", (req, res) => {
     res.status("400").send("req body is required.");
     return;
   }
-  db.Recipe.create(req.body).then(function() {
+  db.Recipe.create(req.body).then(function () {
     res.status(200).end();
   });
 });
+
+router.get("/api/saved/:userId", (req, res) => {
+  db.User.findOne({
+    where: {
+      id: req.params.userId
+    }
+  })
+    .then(function (user) {
+      return (recipes = user.getSaves());
+    })
+    .then(function (recipes) {
+      res.json(recipes);
+    });
+});
+
+// await user.setRecipes([recipeId])
+// const recipes = await user.getRecipes();
 
 //return recipe with the requested id
 router.get("/api/recipe/:id", (req, res) => {
@@ -24,8 +42,51 @@ router.get("/api/recipe/:id", (req, res) => {
     where: {
       id: req.params.id
     }
-  }).then(function(recipe) {
+  }).then(function (recipe) {
     res.json(recipe);
+  });
+});
+
+//insert or update a note
+router.put("/api/note", (req, res) => {
+  db.Note.upsert({
+    note: req.body.note,
+    RecipeId: req.body.RecipeId,
+    UserId: req.body.UserId
+  }).then(function (result) {
+    if (result) {
+      res.status(200).send("successfully updated");
+    } else {
+      res.status(200).send("successfully stored");
+    }
+  });
+});
+
+//delete a note
+router.delete("/api/note/:id", (req, res) => {
+  db.Note.destroy({
+    where: {
+      id: req.params.id
+    }
+  }).then(function () {
+    res.status(200).send("note deleted");
+  });
+});
+
+router.get("/api/note/:recipeId/:userId", (req, res) => {
+  db.Note.findOne({
+    where: {
+      [Op.and]: [
+        {
+          RecipeId: req.params.recipeId
+        },
+        {
+          UserId: req.params.userId
+        }
+      ]
+    }
+  }).then(function (note) {
+    res.json(note);
   });
 });
 
@@ -49,7 +110,7 @@ router.get("/api/search/:keyword", (req, res) => {
         }
       ]
     }
-  }).then(function(recipes) {
+  }).then(function (recipes) {
     res.json(recipes);
   });
 });
