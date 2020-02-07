@@ -16,7 +16,7 @@ $(document).ready(function() {
       data: noteObj
     }).then(function() {
       $("#userNotes").val(" ");
-      //get the note id of the note to attach to element
+      //get the note id of the note to attach to element for possible delete
       $.get("/api/note/" + note.RecipeId + "/" + note.UserId).then(function() {
         //change this var noteDiv to whatever it really is
         $("noteDiv").data("nodeId", result.id);

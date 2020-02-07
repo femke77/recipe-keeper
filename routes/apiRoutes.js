@@ -18,6 +18,7 @@ router.post("/api/newrecipe", (req, res) => {
   });
 });
 
+//gets the recipes saved by the user using the user id
 router.get("/api/saved/:userId", (req, res) => {
   db.User.findOne({
     where: {
@@ -30,6 +31,18 @@ router.get("/api/saved/:userId", (req, res) => {
     .then(function(recipes) {
       res.json(recipes);
     });
+});
+
+//saves the recipeid and userid into the save table as a save.
+router.post("/api/save/:userId/:recipeId", (req, res) => {
+  db.User.findOne({
+    where: {
+      id: req.params.userId
+    }
+  }).then(function(user) {
+    user.addSaves(req.params.recipeId);
+    res.status(200).send("save was successful");
+  });
 });
 
 // await user.setRecipes([recipeId])
