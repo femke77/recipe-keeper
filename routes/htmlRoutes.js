@@ -20,10 +20,12 @@ router.get("/", (req, res) => {
   });
 });
 
+// TEST (un note later)
 router.get("/dashboard", (req, res) => {
   //show all saved recipes with their notes (join)
   res.render("dashboard");
 });
+// END TEST
 
 router.get("/create", (req, res) => {
   //show form to make a new recipe

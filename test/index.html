@@ -130,6 +130,71 @@
     </form>
    
     <!-- End Recipe Form -->
+
+    
+    `<div class="column is-one-third">
+        <div class="card large">
+            <div class="card-image">
+                <figure class="image">
+                    <!-- image  -->
+                    <img src="${element.image}" />
+                </figure>
+            </div>
+            <div class="card-content">
+                <div class="media">
+                    <div class="media-content">
+                        <p class="title is-4 no-padding">
+                            ${element.title}
+                        </p>
+                        <p class="subtitle is-6">Dish type: ${element.dishType}</p>
+                    </div>
+                </div>
+                <div class="content">
+                    <p>Serves: ${element.servings}</p>
+                </div>
+            </div>
+        </div>
+        <footer class="card-footer">
+            <a href="#" class="card-footer-item">Save Recipe</a>
+        </footer>
+    </div>
+    </div>
+    <!-- Card two -->
+    <div class="column is-one-third">
+        <div class="card large">
+            <div class="card-content">
+                <div class="media">
+                    <div class="media-content">
+                        <p class="title is-4 no-padding">Ingredients</p>
+                        <hr>
+                    </div>
+                </div>
+                <div class="content">
+                    <ul id="recList">
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="column is-one-third">
+        <div class="card large">
+            <div class="card-content">
+                <div class="media">
+                    <div class="media-content">
+                        <p class="title is-4 no-padding">Directions</p>
+                        <hr>
+                    </div>
+                </div>
+                <div class="content">
+                    <ol id="recDirections">
+                    </ol>
+                </div>
+                <iframe width="auto" height="auto" src="https://www.youtube.com/embed/PYwzW6CCxJU" frameborder="0"
+                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
     <!-- SCRIPT -->
     <script>
        

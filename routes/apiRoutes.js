@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 //api routing
 var express = require("express");
 
@@ -13,7 +14,7 @@ router.post("/api/newrecipe", (req, res) => {
     res.status("400").send("req body is required.");
     return;
   }
-  db.Recipe.create(req.body).then(function() {
+  db.Recipe.create(req.body).then(function () {
     res.status(200).end();
   });
 });
@@ -25,10 +26,10 @@ router.get("/api/saved/:userId", (req, res) => {
       id: req.params.userId
     }
   })
-    .then(function(user) {
+    .then(function (user) {
       return (recipes = user.getSaves());
     })
-    .then(function(recipes) {
+    .then(function (recipes) {
       res.json(recipes);
     });
 });
@@ -51,7 +52,7 @@ router.get("/api/recipe/:id", (req, res) => {
     where: {
       id: req.params.id
     }
-  }).then(function(recipe) {
+  }).then(function (recipe) {
     res.json(recipe);
   });
 });
@@ -62,7 +63,7 @@ router.put("/api/note", (req, res) => {
     note: req.body.note,
     RecipeId: req.body.RecipeId,
     UserId: req.body.UserId
-  }).then(function(result) {
+  }).then(function (result) {
     if (result) {
       res.status(200).send("successfully updated");
     } else {
@@ -77,7 +78,7 @@ router.delete("/api/note/:id", (req, res) => {
     where: {
       id: req.params.id
     }
-  }).then(function() {
+  }).then(function () {
     res.status(200).send("note deleted");
   });
 });
@@ -94,7 +95,7 @@ router.get("/api/note/:recipeId/:userId", (req, res) => {
         }
       ]
     }
-  }).then(function(note) {
+  }).then(function (note) {
     res.json(note);
   });
 });
@@ -119,7 +120,7 @@ router.get("/api/search/:keyword", (req, res) => {
         }
       ]
     }
-  }).then(function(recipes) {
+  }).then(function (recipes) {
     res.json(recipes);
   });
 });

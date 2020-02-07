@@ -138,12 +138,7 @@ $(document).ready(function () {
               <ol id="recDirections">
               </ol>
             </div>
-            <iframe width="auto" height="auto" src="https://www.youtube.com/embed/PYwzW6CCxJU"
-              frameborder="0"
-              allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-              allowfullscreen></iframe>
           </div>
-
         </div>
       </div>
       `
