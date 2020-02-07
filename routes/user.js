@@ -48,9 +48,9 @@ router.post("/login", function(req, res) {
     //res.redirect( '/' );
   })(req, res);
 });
-router.get("/logout", function(res, req) {
-  req.session.destroy(function() {
-    res.redirect("/login");
+router.get("/logout", function(req, res) {
+  req.session.destroy(function(err) {
+    res.redirect("/");
   });
 });
 
