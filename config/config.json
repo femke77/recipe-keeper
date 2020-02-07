@@ -1,14 +1,14 @@
 {
   "development": {
     "username": "root",
-    "password": "5weetswisher",
+    "password": "2hearts",
     "database": "recipes_db",
     "host": "localhost",
     "dialect": "mysql"
   },
   "test": {
     "username": "root",
-    "password": "5weetswisher",
+    "password": "2hearts",
     "database": "test_db",
     "host": "localhost",
     "dialect": "mysql",
