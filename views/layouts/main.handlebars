@@ -11,9 +11,9 @@
   <!-- Styling (Bulma, Font Awesome, Custom -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css">
   <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
-  <link rel="stylesheet" href="../styles/styles.css"> 
+  <link rel="stylesheet" href="../styles/styles.css">
 
-{{!-- JQuery and JQ Validate --}}
+  {{!-- JQuery and JQ Validate --}}
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.1/dist/jquery.validate.js"></script>
 </head>
@@ -24,7 +24,7 @@
       <div class="navbar-brand">
 
         <!-- Cookie Link  -->
-        <a class="navbar-item" href="noneYa">
+        <a class="navbar-item" href="/">
 
           <!-- Cookie  -->
           <i class="fas fa-cookie-bite fa-5x"></i>
@@ -38,8 +38,14 @@
       </div>
       <div id="navbarMenu" class="navbar-menu">
         <div class="navbar-end">
-          <a class="navbar-item">
+          <a href="/" class="navbar-item">
             About us
+          </a>
+          <a href="./dashboard" class="navbar-item">
+            Dashboard
+          </a>
+          <a href="./create" class="navbar-item">
+            Create a Recipe
           </a>
         </div>
       </div>
@@ -59,6 +65,8 @@
       </div>
     </div>
   </footer>
+
+  <script src="/js/burgerscript.js"></script>
 </body>
 
 </html>

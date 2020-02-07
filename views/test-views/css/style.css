@@ -2,19 +2,14 @@
     overflow: hidden
 }
 
-h1 {
-    font-family: "Zenon Bold Italic", Helvetica, sans-serif;
-    font-size: 60px;
-}
-
 .card-image {
-    /* height: 350px; */
+    height: 350px;
     width: auto;
     overflow: hidden;
 }
 
 .card.large {
-    height: auto;
+    height: 500px;
     -webkit-backface-visibility: hidden;
     backface-visibility: initial;
     border-radius: 5px;
@@ -25,7 +20,6 @@ h1 {
 }
 
 #flow span {
-    z-index: -5;
     display: block;
     width: 200vw;
     height: 195vw;
@@ -37,7 +31,6 @@ h1 {
 }
 
 .flow-1 {
-    z-index: -5;
     background: #eeff00;
     -webkit-animation: rotating 20s linear infinite;
     -moz-animation: rotating 20s linear infinite;
@@ -47,7 +40,6 @@ h1 {
 }
 
 .flow-2 {
-    z-index: -5;
     background: #90C94D;
     position: absolute;
     -webkit-animation: rotating 15s linear infinite;
@@ -58,7 +50,6 @@ h1 {
 }
 
 .flow-3 {
-    z-index: -5;
     background: #90C94D;
     position: absolute;
     -webkit-animation: rotating 7s linear infinite;

@@ -10,11 +10,12 @@ var db = require("../models");
 router.get("/", (req, res) => {
   db.Recipe.findAll({
     order: db.sequelize.random(),
-    limit: 1
+    limit: 3
   }).then(function(recipes) {
     var hbsObject = {
       recipes: recipes
     };
+    console.log(hbsObject);
     res.render("index", hbsObject);
   });
 });
@@ -27,6 +28,11 @@ router.get("/dashboard", (req, res) => {
 router.get("/create", (req, res) => {
   //show form to make a new recipe
   res.render("createRecipe");
+});
+
+router.get("/recipe", (req, res) => {
+  //show all saved recipes with their notes (join)
+  res.render("recipe");
 });
 
 router.get("*", (req, res) => {
