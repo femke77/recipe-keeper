@@ -1,7 +1,6 @@
 var express = require("express");
 var router = express.Router();
 var db = require("../models");
-//var exports = (module.exports = {});
 
 function isLoggedIn(req, res, next) {
   if (req.isAuthenticated()) {
@@ -9,10 +8,6 @@ function isLoggedIn(req, res, next) {
   }
   res.redirect("/login");
 }
-
-// exports.signup = function(req, res) {
-//   res.render("signup");
-// };
 
 router.get("/signup", (req, res) => {
   res.render("signup");
@@ -22,9 +17,9 @@ router.get("/login", function(req, res) {
   res.render("login");
 });
 
-router.get("/test", isLoggedIn, function(req, res) {
+router.get("/user", isLoggedIn, function(req, res) {
   console.log(req.user);
-  res.send("Hello" + req.user.firstName);
+  res.json(req.user);
 });
 
 //on landing page, render the index.hbs file with x number of  random recipes from the db

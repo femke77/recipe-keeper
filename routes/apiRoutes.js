@@ -100,6 +100,7 @@ router.get("/api/note/:recipeId/:userId", (req, res) => {
   });
 });
 
+
 //The main form of searching the database - user enters a keyword and function returns
 //all hits that match category (cuisine type) or keyword as substring anywhere in title
 router.get("/api/search/:keyword", (req, res) => {

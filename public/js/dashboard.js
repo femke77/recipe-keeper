@@ -1,43 +1,19 @@
 $(document).ready(function() {
-  $("#saveNote").on("click", function() {
-    var note = $("#userNotes")
-      .val()
-      .trim();
-    //get the recipe id from element data
-    //get the user id from session
-    var noteObj = {
-      note: note,
-      RecipeId: 5,
-      UserId: 1
-    };
-    $.ajax({
-      type: "put",
-      url: "/api/note",
-      data: noteObj
-    }).then(function() {
-      $("#userNotes").val(" ");
-      //get the note id of the note to attach to element for possible delete
-      $.get("/api/note/" + note.RecipeId + "/" + note.UserId).then(function() {
-        //change this var noteDiv to whatever it really is
-        $("noteDiv").data("nodeId", result.id);
-      });
-    });
-  });
-
   // On Search Click
-  var userid = 1;
-  // // Send the GET request.
-  $.ajax("/api/saved/" + userid, {
-    type: "GET"
-  }).then(function(response) {
-    $("#recipesBody").empty();
+  $.get("/user").then(function(user) {
+    var userid = user.id;
+    // // Send the GET request.
+    $.ajax("/api/saved/" + userid, {
+      type: "GET"
+    }).then(function(response) {
+      $("#recipesBody").empty();
 
-    for (let i = 0; i < response.length; i++) {
-      const element = response[i];
+      for (let i = 0; i < response.length; i++) {
+        const element = response[i];
 
-      // Append them to food list
-      $("#recipesBody").append(
-        `<div class="column is-one-third recipe-card" id="${element.title}">
+        // Append them to food list
+        $("#recipesBody").append(
+          `<div class="column is-one-third recipe-card" id="${element.title}">
                     <div class="card large ">
                         <div class="card-image">
                             <figure class="image">
@@ -65,35 +41,33 @@ $(document).ready(function() {
                         
                     </footer>
                 </div>`
-      );
-      $(".recipe-card").data("recipe", element);
-    } //end for loop
+        );
+        $(".recipe-card").data("recipe", element);
+      } //end for loop
+    });
   });
 
   // End Search Click
-  console.log("populated at beginning");
 
   // Start Card Click to display recipe
   $(document.body).on("click", ".recipe-card", function() {
-    console.log("card clicking works");
     var keyword = this.getAttribute("id");
-    console.log(`id: ${keyword}`);
 
     // Send the PUT request.
     $.ajax("/api/search/" + keyword, {
       type: "GET"
     }).then(function(response) {
       $("#recipesBody").empty();
-      console.log("empty successful");
       const element = response[0];
 
       // Handling ingredients list
-      // Handling ingredients list
-      // Handling ingredients list
       const valuesIng = Object.values(element.ingredients);
-      console.log("values: " + valuesIng);
-      console.log(valuesIng.length);
 
+      //attach recipe data to modal
+      $("#saveNote").data("recipeData", element);
+      
+      var test = $("#saveNote").data("recipeData");
+      console.log("test recipe id " + test.id);
       // Append them to food list
       $("#recipesBody").append(
         `<div class="column is-one-third">
@@ -183,28 +157,37 @@ $(document).ready(function() {
     });
   });
 
-  // Note clicking
   $("#saveNote").on("click", function() {
+    console.log("clicked");
     var note = $("#userNotes")
       .val()
       .trim();
-    //get the recipe id from element data
+    
+    var currentRecipe = $(this).data("recipeData");
+    console.log("recipe id " + currentRecipe.id);
+
     //get the user id from session
-    var noteObj = {
-      note: note,
-      RecipeId: 5,
-      UserId: 1
-    };
-    $.ajax({
-      type: "put",
-      url: "/api/note",
-      data: noteObj
-    }).then(function() {
-      $("#userNotes").val(" ");
-      //get the note id of the note to attach to element
-      $.get("/api/note/" + note.RecipeId + "/" + note.UserId).then(function() {
-        //change this var noteDiv to whatever it really is
-        $("noteDiv").data("nodeId", result.id);
+    $.get("/user").then(function(user) {
+      console.log("this is my " + user.id);
+      var noteObj = {
+        note: note,
+        RecipeId: currentRecipe.id,
+        UserId: user.id
+      };
+      console.log(noteObj.RecipeId);
+      $.ajax({
+        type: "put",
+        url: "/api/note",
+        data: noteObj
+      }).then(function() {
+        $("#userNotes").val(" ");
+        //get the note id of the note to attach to element for possible delete
+        $.get("/api/note/" + note.RecipeId + "/" + note.UserId).then(
+          function() {
+            //change this var noteDiv to whatever it really is
+            $("noteDiv").data("nodeId", result.id);
+          }
+        );
       });
     });
   });
