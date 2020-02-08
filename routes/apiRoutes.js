@@ -83,6 +83,16 @@ router.delete("/api/note/:id", (req, res) => {
   });
 });
 
+router.get("/api/note/:id", (req, res) => {
+  db.Note.findOne({
+    where: {
+      id: req.params.id
+    }
+  }).then(function (note) {
+    res.json(note);    
+  });
+});
+
 router.get("/api/note/:recipeId/:userId", (req, res) => {
   db.Note.findOne({
     where: {
