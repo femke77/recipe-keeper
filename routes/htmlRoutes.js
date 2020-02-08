@@ -24,7 +24,7 @@ router.get("/login", function(req, res) {
 
 router.get("/test", isLoggedIn, function(req, res) {
   console.log(req.user);
-  res.send("Hello");
+  res.send("Hello" + req.user.firstName);
 });
 
 //on landing page, render the index.hbs file with x number of  random recipes from the db

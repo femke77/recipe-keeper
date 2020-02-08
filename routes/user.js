@@ -17,7 +17,7 @@ router.post("/signup", function(req, res, next) {
   })(req, res, next);
 });
 
-router.post("/api/login", function(req, res) {
+router.post("/api/login", function(req, res, next) {
   passport.authenticate("login", function(err, user) {
     if (err) {
       return next(err);
@@ -36,7 +36,7 @@ router.post("/api/login", function(req, res) {
       req.authenticated = true;
       return res.redirect("/dashboard");
     });
-  })(req, res);
+  })(req, res, next);
 });
 
 //logout router destroy session
