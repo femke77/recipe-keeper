@@ -1,4 +1,6 @@
 $(document).ready(function() {
+  $("#dash").show();
+  $("#logout").show();
   $("#saveNote").on("click", function() {
     var note = $("#userNotes")
       .val()
@@ -218,6 +220,11 @@ $(document).ready(function() {
     }).then(function() {
       console.log("note deleted");
     });
+  });
+
+  $(document.body).on("ready", "#welcome", function() {
+    $(".modal").addClass("is-active");
+    console.log("modal pops");
   });
 
   $(document.body).on("click", "#openModal", function() {

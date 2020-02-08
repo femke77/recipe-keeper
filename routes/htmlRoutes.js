@@ -15,9 +15,11 @@ function isLoggedIn(req, res, next) {
 router.get("/signup", (req, res) => {
   res.render("signup");
 });
+
 router.get("/dashboard", isLoggedIn, function(req, res) {
   console.log(req.user);
-  res.send("Hello" + req.user.firstName);
+  res.render("dashboard");
+  // , res.send("Hello" + req.user.firstName);
 });
 
 router.get("/login", function(req, res) {

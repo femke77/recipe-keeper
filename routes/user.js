@@ -43,6 +43,7 @@ router.post("/api/login", function(req, res, next) {
 router.get("/logout", function(req, res) {
   req.session.destroy(function() {
     res.redirect("/");
+    // console.log("logged out : " + user);
   });
 });
 

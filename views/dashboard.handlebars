@@ -35,7 +35,7 @@
 </div>
 
 {{!-- modal  --}}
-<div class="modal" >
+<div class="modal">
     <div class="modal-background"></div>
     <div class="modal-card">
         <header class="modal-card-head">
@@ -57,6 +57,35 @@
             <button class="button is-info" id="saveNote">Save changes</button>
             <button class="button" id="closeModal">Cancel</button>
         </footer>
+    </div>
+</div>
+{{!-- end modal  --}}
+{{!-- modal  you are now logged in --}}
+<div class="container">
+    <div class="modal">
+        <div class="modal-background"></div>
+        <div class="modal-card">
+            <header class="modal-card-head">
+                <p class="modal-card-title">Welcome</p>
+                <button class="delete" aria-label="close"></button>
+            </header>
+            <section class="modal-card-body">
+                <!-- Content ... -->
+                <div class="field">
+                    <label class="label">User Notes</label>
+                    <div class="control is-expanded">
+                        <textarea class="textarea required" id="welcome"
+                        placeholder="Congratulations!!
+                            you are (username) are now signed In
+                            What are you craving today?" rows="3"></textarea>
+                    </div>
+                </div>
+            </section>
+            {{!-- End Content  --}}
+            <footer class="modal-card-foot">
+                <button class="button" id="closeModal">Begin</button>
+            </footer>
+        </div>
     </div>
 </div>
 {{!-- end modal  --}}

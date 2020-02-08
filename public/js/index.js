@@ -1,6 +1,8 @@
 /* eslint-disable prettier/prettier */
 //javascript for the landing page
 $(document).ready(function () {
+  $("#dash").hide();
+  $("#logout").hide();
 
   $("#login").on("click", function(event){
     event.preventDefault();
@@ -32,10 +34,48 @@ $(document).ready(function () {
 
 
   $("#signup").on("click", function(event){
-    event.preventDefault();
+    console.log("you clicked on me");
+    window.location.href = "/signup";
+    return false;
   });
+  //   event.preventDefault();
+  //   var firstName = $("#firstname").val().trim();
+  //   var lastName = $("#lastname").val().trim();
+  //   var email = $("#email").val().trim();
+  //   var userName = $("#username").val().trim();
+  //   var password = $("#password").val().trim();
+  //   var userData = {
+  //     firstName: firstName,
+  //     lastName: lastName,
+  //     email: email,
+  //     userName: userName,
+  //     password: password
+  //   };
+  //   if (!userData.email || !userData.password) {
+  //     return;
+  //   }
+  //   signUpUser(userData.email, userData.password);
+  //   emailInput.val("");
+  //   passwordInput.val("");
+  // });
+  // function signUpUser(email, password) {
+  //   $.post("/api/signup", {
+  //     email: email,
+  //     password: password
+  //   })
+  //     .then(function(data) {
+  //       window.location.replace("/dashboard");
+     
+  //     })
+  //     .catch(handleLoginErr);
+  // }
 
-
+  // function handleLoginErr(err) {
+  //   $("#alert .msg").text(err.responseJSON);
+  //   $("#alert").fadeIn(500);
+  // }
+ 
+  
 
 
   // On Search Click
