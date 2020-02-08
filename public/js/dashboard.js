@@ -3,6 +3,59 @@ $(document).ready(function() {
   $("#logout").show();
 
   // On Search Click
+  $("#searchButton").on("click", function() {
+    // Grab input from search
+    var keyword = $("#searchInput")
+      .val()
+      .trim();
+    $("#searchInput").val("");
+
+    // // Send the GET request.
+    $.ajax("/api/search/" + keyword, {
+      type: "GET"
+    }).then(function(response) {
+      $("#recipesBody").empty();
+
+      for (let i = 0; i < response.length; i++) {
+        const element = response[i];
+
+        // Append them to drink list
+        $("#recipesBody").append(
+          `<div class="column is-one-third recipe-card" id="${element.title}">
+                <div class="card large ">
+                    <div class="card-image">
+                        <figure class="image">
+                            <!-- image  -->
+                            <img src="${element.image}" />
+                        </figure>
+                    </div>
+                    <div class="card-content">
+                        <div class="media">
+                            <div class="media-content">
+                                <p class="title is-4 no-padding">
+                                    ${element.title}
+                                </p>
+                                <p class="subtitle is-6">Dish type: ${element.dishType}</p>
+                            </div>
+                        </div>
+                        <div class="content">
+                            <p>Serves: ${element.servings}</p>
+
+                        </div>
+                    </div>
+                </div>
+                <footer class="card-footer">
+                    <a href="#" class="card-footer-item">Save Recipe</a>
+                </footer>
+            </div>`
+        );
+        $(".recipe-card").data("recipe", element);
+      }
+    });
+  });
+  // End Search Click
+
+  // On dashboard load display the user's saved recipes
   $.get("/user").then(function(user) {
     var userid = user.id;
     // // Send the GET request.
@@ -163,9 +216,7 @@ $(document).ready(function() {
           })
           .then(function(element) {
             var recipeId = element.id;
-            console.log(recipeId + " " + userId);
             $.get("/api/note/" + recipeId + "/" + userId).then(function(note) {
-              console.log(note);
               if (note) {
                 $("#recipesBody").append(
                   `<div class="column is-one-quarter">
@@ -181,7 +232,6 @@ $(document).ready(function() {
                             <div class="content">
                      </div>
                   </div>
-  
                 </div>
             </div>
             `
@@ -232,6 +282,7 @@ $(document).ready(function() {
         data: noteObj
       }).then(function() {
         $("#userNotes").val(" ");
+        //attache the note id for deletion (not sure of the data's lifespan though)
         $.get("/api/note/" + noteObj.RecipeId + "/" + noteObj.UserId).then(
           function(note) {
             $("#recipesBody").data("noteData", note);
@@ -252,11 +303,6 @@ $(document).ready(function() {
     });
   });
 
-  $(document.body).on("ready", "#welcome", function() {
-    $(".modal").addClass("is-active");
-    console.log("modal pops");
-  });
-
   $(document.body).on("click", "#openModal", function() {
     $(".modal").addClass("is-active");
   });
@@ -269,6 +315,7 @@ $(document).ready(function() {
     $(".modal").removeClass("is-active");
   });
 
+  //removes the closing X in the upper right of modal
   $(document.body).on("click", ".delete", function() {
     $(".modal").removeClass("is-active");
   });

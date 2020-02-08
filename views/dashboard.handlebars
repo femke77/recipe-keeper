@@ -24,6 +24,7 @@
 
             <!-- Multiline columns means they stack once width of screen is filled  -->
             <div class="container has-text-centered">
+                <h2>Hello {{name.firstName}}!</h2>
                 <h2>Your Crave Faves</h2>
                 <br>
             </div>
@@ -36,12 +37,9 @@
     </div>
 </div>
 
+
 {{!-- modal  --}}
-<<<<<<< HEAD
 <div class="modal" id="recipeNotes">
-=======
-<div class="modal">
->>>>>>> 76e49d30ece4ff6700e278f853136c0bdc09fb2d
     <div class="modal-background"></div>
     <div class="modal-card">
         <header class="modal-card-head">
@@ -65,36 +63,9 @@
         </footer>
     </div>
 </div>
+
 {{!-- end modal  --}}
-{{!-- modal  you are now logged in --}}
-<div class="container">
-    <div class="modal">
-        <div class="modal-background"></div>
-        <div class="modal-card">
-            <header class="modal-card-head">
-                <p class="modal-card-title">Welcome</p>
-                <button class="delete" aria-label="close"></button>
-            </header>
-            <section class="modal-card-body">
-                <!-- Content ... -->
-                <div class="field">
-                    <label class="label">User Notes</label>
-                    <div class="control is-expanded">
-                        <textarea class="textarea required" id="welcome"
-                        placeholder="Congratulations!!
-                            you are (username) are now signed In
-                            What are you craving today?" rows="3"></textarea>
-                    </div>
-                </div>
-            </section>
-            {{!-- End Content  --}}
-            <footer class="modal-card-foot">
-                <button class="button" id="closeModal">Begin</button>
-            </footer>
-        </div>
-    </div>
-</div>
-{{!-- end modal  --}}
+
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="/js/dashboard.js"></script>

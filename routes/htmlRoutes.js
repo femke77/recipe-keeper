@@ -14,8 +14,11 @@ router.get("/signup", (req, res) => {
 });
 
 router.get("/dashboard", isLoggedIn, function(req, res) {
-  console.log(req.user);
-  res.render("dashboard");
+  var user = {
+    name: req.user
+  };
+  console.log("this is " + req.user);
+  res.render("dashboard", user);
   // , res.send("Hello" + req.user.firstName);
 });
 
@@ -36,11 +39,6 @@ router.get("/", (req, res) => {
     console.log(hbsObject);
     res.render("index", hbsObject);
   });
-});
-
-router.get("/dashboard", (req, res) => {
-  //show all saved recipes with their notes (join)
-  res.render("dashboard");
 });
 
 router.get("/create", (req, res) => {
