@@ -29,14 +29,10 @@ app.use(passport.session()); // persistent login sessions
 // PUBLIC FILE SERVER
 app.use(express.static("public"));
 
-//Routes
-
-// eslint-disable-next-line no-unused-vars
-
 // Routes
+app.use(authRoutes);
 app.use(apiRoutes);
 app.use(htmlRoutes);
-app.use(authRoutes);
 //load passport strategies
 require("./config/passport.js")(passport, db.User);
 

@@ -1,10 +1,7 @@
-//serve html/handlebars
-
 var express = require("express");
-//var app = require("../server");
 var router = express.Router();
 var db = require("../models");
-var exports = (module.exports = {});
+//var exports = (module.exports = {});
 
 function isLoggedIn(req, res, next) {
   if (req.isAuthenticated()) {
@@ -12,9 +9,19 @@ function isLoggedIn(req, res, next) {
   }
   res.redirect("/login");
 }
-exports.signup = function(req, res) {
+
+// exports.signup = function(req, res) {
+//   res.render("signup");
+// };
+
+router.get("/signup", (req, res) => {
   res.render("signup");
-};
+});
+
+router.get("/login", function(req, res) {
+  res.render("login");
+});
+
 router.get("/test", isLoggedIn, function(req, res) {
   console.log(req.user);
   res.send("Hello");
@@ -34,25 +41,14 @@ router.get("/", (req, res) => {
   });
 });
 
-// TEST (un note later)
 router.get("/dashboard", (req, res) => {
   //show all saved recipes with their notes (join)
   res.render("dashboard");
 });
-// END TEST
 
 router.get("/create", (req, res) => {
   //show form to make a new recipe
   res.render("createRecipe");
-});
-
-router.get("/recipe", (req, res) => {
-  //show all saved recipes with their notes (join)
-  res.render("recipe");
-});
-
-router.get("/signup", (req, res) => {
-  res.render("signup");
 });
 
 router.get("*", (req, res) => {
