@@ -1,6 +1,43 @@
 /* eslint-disable prettier/prettier */
 //javascript for the landing page
 $(document).ready(function () {
+
+  $("#login").on("click", function(event){
+    event.preventDefault();
+    var email = $("#loginEmail").val().trim();
+    var password = $("#loginPassword").val().trim();
+    var userData = {
+      email: email,
+      password: password
+    };
+    if(!userData.email || !userData.password) {
+      return;
+    }
+    loginUser(userData.email, userData.password);
+    $("#loginEmail").val(" ");
+    $("#loginPassword").val(" ");
+  });
+
+
+  function loginUser(email, password){
+    $.post("/api/login", {
+      email: email,
+      password: password
+    }).then(function(){
+      window.location.replace("/dashboard");
+    }).catch(function(err){
+      console.log(err);
+    });
+  }
+
+
+  $("#signup").on("click", function(event){
+    event.preventDefault();
+  });
+
+
+
+
   // On Search Click
   $("#searchButton").on("click", function () {
     console.log("search works");

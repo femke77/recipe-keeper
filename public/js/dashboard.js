@@ -170,9 +170,6 @@ $(document).ready(function() {
         $("#recList").append(ing);
       }
       console.log("test recList population successful");
-
-      // START---  instructions listing  WORKING --------------------------------------3
-      // START---  instructions listing  WORKING --------------------------------------3
       // START---  instructions listing  WORKING --------------------------------------3
       var instructions = element.instructions;
       var a1 = new Array();
@@ -186,8 +183,6 @@ $(document).ready(function() {
     });
   });
 
-  // Note clicking
-  // Note clicking
   // Note clicking
   $("#saveNote").on("click", function() {
     var note = $("#userNotes")
@@ -229,4 +224,19 @@ $(document).ready(function() {
     $(".modal").addClass("is-active");
     console.log("modal pops");
   });
-});
+
+  $(document.body).on("click", "#closeModal", function() {
+    $(".modal").removeClass("is-active");
+    console.log("modal pops");
+  });
+
+  $(document.body).on("click", "#saveNote", function() {
+    $(".modal").removeClass("is-active");
+    console.log("modal pops");
+  });
+
+  $(document.body).on("click", ".delete", function() {
+    $(".modal").removeClass("is-active");
+    console.log("modal pops");
+  });
+}); //end doc ready fn

@@ -1,11 +1,6 @@
-// eslint-disable-next-line no-unused-vars
 var express = require("express");
 var router = express.Router();
 var passport = require("passport");
-
-router.get("/signup", function(req, res) {
-  res.render("signup");
-});
 
 router.post("/signup", function(req, res, next) {
   passport.authenticate("signup", function(err, user) {
@@ -13,26 +8,23 @@ router.post("/signup", function(req, res, next) {
       return next(err);
     }
     if (!user) {
-      // console.log( 'User not registered' );
+      console.log("User not registered");
       return res.redirect("/signup");
     }
-    // console.log( 'User registered!' );
+    console.log("User registered!");
     return res.redirect("/dashboard");
     //res.redirect( '/' );
   })(req, res, next);
 });
-router.get("/login", function(req, res) {
-  res.render("login");
-});
 
-router.post("/login", function(req, res) {
+router.post("/api/login", function(req, res, next) {
   passport.authenticate("login", function(err, user) {
     if (err) {
       return next(err);
     }
     if (!user) {
       console.log("User not authenticated");
-      return res.redirect("/user/login");
+      return res.redirect("/");
     }
     req.logIn(user, function(loginerr) {
       if (loginerr) {
@@ -42,13 +34,14 @@ router.post("/login", function(req, res) {
       req.session.messages = "Login successfull";
       req.session.authenticated = true;
       req.authenticated = true;
-      return res.redirect("/test");
+      return res.redirect("/dashboard");
     });
-  })(req, res);
+  })(req, res, next);
 });
+
+//logout router destroy session
 router.get("/logout", function(req, res) {
-  // eslint-disable-next-line no-unused-vars
-  req.session.destroy(function(err) {
+  req.session.destroy(function() {
     res.redirect("/");
   });
 });
