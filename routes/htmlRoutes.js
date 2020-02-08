@@ -18,7 +18,6 @@ router.get("/dashboard", isLoggedIn, function(req, res) {
     name: req.user
   };
   res.render("dashboard", user);
-  // , res.send("Hello" + req.user.firstName);
 });
 
 router.get("/user", isLoggedIn, function(req, res) {
