@@ -16,7 +16,7 @@ module.exports = function(sequelize, DataTypes) {
         isEmail: true
       }
     },
-    username: {
+    userName: {
       type: DataTypes.STRING,
       allowNull: false,
       unique: true,
@@ -29,13 +29,25 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: null,
       unique: true,
       validate: {
-        len: [6, 15]
+        len: [1]
       }
     }
+    // lastLogin: {
+    //   type: DataTypes.DATE
+    // },
+    // status: {
+    //   type: DataTypes.ENUM("active", "inactive"),
+    //   defaultValue: "active"
+    // }
   });
 
   User.associate = function(models) {
-    //User.hasMany(models.Recipe);
+    User.hasMany(models.Recipe);
+    User.belongsToMany(models.Recipe, {
+      as: "Saves",
+      through: "Save"
+    });
+    User.hasMany(models.Note);
   };
 
   return User;

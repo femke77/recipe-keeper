@@ -49,7 +49,9 @@ $(document).ready(function() {
                 </div>
                     </footer>
             </div>`
-        ); //end appenmd
+        ); //end append
+        // $("button").attr("data-id", element.id);
+        // console.log($("button").attr("data-id") + " " + element.title);
       }
     });
   });
