@@ -85,7 +85,7 @@ $(document).ready(function () {
                     </div>
                 </div>
                 <footer class="card-footer">
-                    <a href="#" class="card-footer-item">Save Recipe</a>
+                   
                 </footer>
             </div>`
         );
@@ -94,6 +94,8 @@ $(document).ready(function () {
     });
   });
   // End Search Click
+
+
 
   // Start Card Click to display recipe
   $(document.body).on("click", ".recipe-card", function () {
@@ -141,7 +143,7 @@ $(document).ready(function () {
                 </div>
             </div>
             <footer class="card-footer">
-                <a href="#" class="card-footer-item">Save Recipe</a>
+                
             </footer>
             </div>
         </div>

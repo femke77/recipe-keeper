@@ -19,11 +19,10 @@ $(document).ready(function() {
       for (let i = 0; i < response.length; i++) {
         const element = response[i];
 
-        // Append them to drink list
         $("#recipesBody").append(
-          `<div class="column is-one-third recipe-card" id="${element.title}">
-                <div class="card large ">
-                    <div class="card-image">
+          `<div class="column is-one-third recipe" id="${element.title}">
+                <div class="card large">
+                    <div class="card-image recipe-card">
                         <figure class="image">
                             <!-- image  -->
                             <img src="${element.image}" />
@@ -45,11 +44,13 @@ $(document).ready(function() {
                     </div>
                 </div>
                 <footer class="card-footer">
-                    <a href="#" class="card-footer-item">Save Recipe</a>
+                    <button class="save">Save Recipe</button>
                 </footer>
             </div>`
         );
-        $(".recipe-card").data("recipe", element);
+
+        $(".save").data("recipe", element);
+        console.log($(".save").data("recipe").id);
       }
     });
   });
@@ -93,7 +94,7 @@ $(document).ready(function() {
                         </div>
                     </div>
                     <footer class="card-footer">
-                        <a href="#" class="card-footer-item">Remove from Faves</a>
+                        <a class="card-footer-item">Remove from Faves</a>
                         
                     </footer>
                 </div>`
@@ -101,7 +102,22 @@ $(document).ready(function() {
       } //end for loop
     });
   });
+
   // End Search Click
+  $(document).on("click", ".save", function(event) {
+    event.preventDefault();
+    console.log("save clicked");
+
+    $.get("/user").then(function(user) {
+      var userId = user.id;
+      var currentRecipe = $(this).data("recipe");
+      console.log(currentRecipe);
+      var recipeId = currentRecipe.id;
+      $.post("/api/save/" + userId + "/" + recipeId, {}).then(function() {
+        console.log("saved");
+      });
+    });
+  });
 
   // Start Card Click to display recipe
   $(document.body).on("click", ".recipe-card", function() {

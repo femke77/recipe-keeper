@@ -6,7 +6,6 @@ function isLoggedIn(req, res, next) {
   if (req.isAuthenticated()) {
     return next();
   }
-  res.redirect("/login");
 }
 
 router.get("/signup", (req, res) => {
@@ -17,7 +16,6 @@ router.get("/dashboard", isLoggedIn, function(req, res) {
   var user = {
     name: req.user
   };
-  console.log("this is " + req.user);
   res.render("dashboard", user);
   // , res.send("Hello" + req.user.firstName);
 });
@@ -47,16 +45,12 @@ router.get("/create", (req, res) => {
 });
 
 router.get("/recipe", (req, res) => {
-  //show all saved recipes with their notes (join)
+  //show all saved recipes with their notes
   res.render("recipe");
 });
 
 router.get("/signup", (req, res) => {
   res.render("signup");
-});
-
-router.get("/login", function(req, res) {
-  res.render("login");
 });
 
 router.get("*", (req, res) => {
