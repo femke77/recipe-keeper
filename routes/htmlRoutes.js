@@ -13,8 +13,10 @@ router.get("/signup", (req, res) => {
   res.render("signup");
 });
 
-router.get("/login", function(req, res) {
-  res.render("login");
+router.get("/dashboard", isLoggedIn, function(req, res) {
+  console.log(req.user);
+  res.render("dashboard");
+  // , res.send("Hello" + req.user.firstName);
 });
 
 router.get("/user", isLoggedIn, function(req, res) {
@@ -44,6 +46,19 @@ router.get("/dashboard", (req, res) => {
 router.get("/create", (req, res) => {
   //show form to make a new recipe
   res.render("createRecipe");
+});
+
+router.get("/recipe", (req, res) => {
+  //show all saved recipes with their notes (join)
+  res.render("recipe");
+});
+
+router.get("/signup", (req, res) => {
+  res.render("signup");
+});
+
+router.get("/login", function(req, res) {
+  res.render("login");
 });
 
 router.get("*", (req, res) => {

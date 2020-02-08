@@ -1,6 +1,8 @@
 /* eslint-disable prettier/prettier */
 //javascript for the landing page
 $(document).ready(function () {
+  $("#dash").hide();
+  $("#logout").hide();
 
   $("#login").on("click", function(event){
     event.preventDefault();
@@ -31,11 +33,11 @@ $(document).ready(function () {
   }
 
 
-  $("#signup").on("click", function(event){
-    event.preventDefault();
+  $("#signup").on("click", function(){
+    console.log("you clicked on me");
+    window.location.href = "/signup";
+    return false;
   });
-
-
 
 
   // On Search Click

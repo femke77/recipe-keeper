@@ -1,4 +1,7 @@
 $(document).ready(function() {
+  $("#dash").show();
+  $("#logout").show();
+
   // On Search Click
   $.get("/user").then(function(user) {
     var userid = user.id;
@@ -215,7 +218,6 @@ $(document).ready(function() {
       .trim();
     //get the recipe id from the recipe's modal
     var currentRecipe = $(this).data("recipeData");
-
     //get the user id from session
     $.get("/user").then(function(user) {
       var noteObj = {
@@ -248,6 +250,11 @@ $(document).ready(function() {
     }).then(function() {
       console.log("note deleted");
     });
+  });
+
+  $(document.body).on("ready", "#welcome", function() {
+    $(".modal").addClass("is-active");
+    console.log("modal pops");
   });
 
   $(document.body).on("click", "#openModal", function() {
