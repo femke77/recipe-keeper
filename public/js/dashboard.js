@@ -65,7 +65,7 @@ $(document).ready(function() {
 
       //attach recipe data to modal
       $("#saveNote").data("recipeData", element);
-      
+
       var test = $("#saveNote").data("recipeData");
       console.log("test recipe id " + test.id);
       // Append them to food list
@@ -162,7 +162,7 @@ $(document).ready(function() {
     var note = $("#userNotes")
       .val()
       .trim();
-    
+
     var currentRecipe = $(this).data("recipeData");
     console.log("recipe id " + currentRecipe.id);
 
