@@ -1,25 +1,19 @@
-require("dotenv").config();
 var express = require("express");
+var app = express();
+var passport = require("passport");
+var session = require("express-session");
+var bodyParser = require("body-parser");
 var exphbs = require("express-handlebars");
+var authRoutes = require("./routes/user");
 var apiRoutes = require("./routes/apiRoutes");
 var htmlRoutes = require("./routes/htmlRoutes");
-var dbRoutes = require("./routes/dbRoutes");
-
 var db = require("./models");
 
-var app = express();
 var PORT = process.env.PORT || 3000;
 
-// Middleware
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
-app.use(express.static("public"));
-
-// Routes
-app.use(apiRoutes);
-app.use(htmlRoutes);
-app.use(dbRoutes);
-
+//For BodyParser
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 // Handlebars
 app.engine(
   "handlebars",
@@ -28,6 +22,19 @@ app.engine(
   })
 );
 app.set("view engine", "handlebars");
+// Session Stuff
+app.use(session({ secret: "kitties", resave: true, saveUninitialized: true }));
+app.use(passport.initialize());
+app.use(passport.session()); // persistent login sessions
+// PUBLIC FILE SERVER
+app.use(express.static("public"));
+
+// Routes
+app.use(authRoutes);
+app.use(apiRoutes);
+app.use(htmlRoutes);
+//load passport strategies
+require("./config/passport.js")(passport, db.User);
 
 var syncOptions = { force: false };
 
@@ -47,5 +54,4 @@ db.sequelize.sync(syncOptions).then(function() {
     );
   });
 });
-
 module.exports = app;

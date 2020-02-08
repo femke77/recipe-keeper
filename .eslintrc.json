@@ -15,7 +15,6 @@
         "ecmaFeatures": {
             "jsx": true
         }
-
     },
     "rules": {
         "no-duplicate-case": "error",
