@@ -20,9 +20,9 @@ $(document).ready(function() {
         const element = response[i];
 
         $("#recipesBody").append(
-          `<div class="column is-one-third recipe" id="${element.title}">
+          `<div class="column is-one-third recipe recipe-card" id="${element.title}">
                 <div class="card large">
-                    <div class="card-image recipe-card">
+                    <div class="card-image">
                         <figure class="image">
                             <!-- image  -->
                             <img src="${element.image}" />
@@ -47,7 +47,7 @@ $(document).ready(function() {
                     <button class="save">Save Recipe</button>
                 </footer>
             </div>`
-        );
+        ); //end append
 
         $(".save").data("recipe", element);
         console.log($(".save").data("recipe").id);
@@ -103,21 +103,21 @@ $(document).ready(function() {
     });
   });
 
-  // End Search Click
-  $(document).on("click", ".save", function(event) {
-    event.preventDefault();
-    console.log("save clicked");
+  // // End Search Click
+  // $(".save").on("click", function(event) {
+  //   event.preventDefault();
+  //   console.log("save clicked");
 
-    $.get("/user").then(function(user) {
-      var userId = user.id;
-      var currentRecipe = $(this).data("recipe");
-      console.log(currentRecipe);
-      var recipeId = currentRecipe.id;
-      $.post("/api/save/" + userId + "/" + recipeId, {}).then(function() {
-        console.log("saved");
-      });
-    });
-  });
+  //   $.get("/user").then(function(user) {
+  //     var userId = user.id;
+  //     var currentRecipe = $(this).data("recipe");
+  //     console.log(currentRecipe);
+  //     var recipeId = currentRecipe.id;
+  //     $.post("/api/save/" + userId + "/" + recipeId, {}).then(function() {
+  //       console.log("saved");
+  //     });
+  //   });
+  // });
 
   // Start Card Click to display recipe
   $(document.body).on("click", ".recipe-card", function() {
